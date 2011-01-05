@@ -1,11 +1,6 @@
 Six470::Application.routes.draw do
-  get "user/create"
 
-  get "user/display"
-
-  get "user/edit"
-
-  get "user/destroy"
+  resources :users
 
   get "home/welcome"
   
