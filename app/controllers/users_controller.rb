@@ -11,6 +11,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save
       redirect_to users_url
+    else
+      render :new
     end
   end
 
@@ -19,9 +21,16 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
   
   def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      redirect_to users_url
+    else
+      render :edit
+    end
   end
 
   def destroy
