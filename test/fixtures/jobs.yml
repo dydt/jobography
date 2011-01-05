@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  company: MyString
+  pay: 1.5
+  date: 2011-01-05 13:42:33
+  source: MyString
+  desc: MyString
+  lat: 1.5
+  long: 1.5
+  state: MyString
+  city: 
+  zip: MyString
+
+two:
+  title: MyString
+  company: MyString
+  pay: 1.5
+  date: 2011-01-05 13:42:33
+  source: MyString
+  desc: MyString
+  lat: 1.5
+  long: 1.5
+  state: MyString
+  city: 
+  zip: MyString

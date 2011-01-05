@@ -1,6 +1,7 @@
 Six470::Application.routes.draw do
+  get "job/display"
 
-  resources :users
+  resources :user
 
   get "home/welcome"
   
