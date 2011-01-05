@@ -1,4 +1,6 @@
 Six470::Application.routes.draw do
+  get "job/display"
+
   get "user/create"
 
   get "user/display"
