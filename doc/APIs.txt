@@ -1,0 +1,6 @@
+Indeed:
+	URL: https://ads.indeed.com/jobroll/xmlfeed
+	Format: http request, xml response
+	Provides: title, company, location, date, desc, url
+	Issues: must be queried by title and location -- query in real time and cache?
+	

@@ -1,23 +1,24 @@
-Users:
-	id (int)
-	
-	joinDate (Date)
-	lastLogin (Date)
-
-	fName (String)
-	lName (String)
-	email (String)
-	
-	title (String)
-	
-	addr (String)
-	lat (float)
-	long (float)
-	
-	fbID (String)
-	fbTok (String)
-	
-	liID (String)
-	liTok (String)
-	
-	contacts (User Refs)
+Users
+=====
+        id (int)
+        
+        joinDate (Date)
+        lastLogin (Date)
+        
+        fName (String)
+        lName (String)
+        email (String)
+        
+        title (String)
+        
+        addr (String)
+        lat (float)
+        long (float)
+        
+        fbID (String)
+        fbTok (String)
+        
+        liID (String)
+        liTok (String)
+        
+        contacts (User Refs)
