@@ -1,5 +1,9 @@
 <h1>User#display</h1>
 
+<p><%= link_to 'New user', :action => 'new' %></p>
+
+<br />
+
 <% @users.each do |user| %>
-	<p><%= user.firstName %> <%= user.lastName %> : <%= user.email %></p>
+	<p><%= link_to user.firstName+' '+user.lastName, user, :action =>'edit' %></p>
 <% end %>

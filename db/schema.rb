@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110105184233) do
+ActiveRecord::Schema.define(:version => 20110106000738) do
 
   create_table "jobs", :force => true do |t|
     t.string   "title"
@@ -32,10 +32,18 @@ ActiveRecord::Schema.define(:version => 20110105184233) do
     t.string   "firstName"
     t.string   "lastName"
     t.string   "email"
-    t.string   "password"
-    t.datetime "lastLogin"
+    t.string   "crypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "salt"
+    t.string   "persistence_token"
+    t.integer  "login_count",        :default => 0
+    t.integer  "failed_login_count", :default => 0
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
   end
 
 end

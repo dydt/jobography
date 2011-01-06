@@ -27,6 +27,6 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 #   gem 'webrat'
 
 gem 'taps'
-gem 'authlogic'
+gem 'authlogic', :git => "git://github.com/binarylogic/authlogic.git"
 
 # end

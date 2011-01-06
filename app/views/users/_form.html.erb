@@ -20,7 +20,9 @@
 	<%= form.text_field :email %>
 	<br />
 	<%= form.label :password %>
-	<%= form.text_field :password %>
+	<%= form.password_field :password %>
 	<br />
+	<%= form.label :password_confirmation %>
+	<%= form.password_field :password_confirmation %>
 	<%= form.submit %>
 <% end %>
