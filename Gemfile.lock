@@ -5,6 +5,12 @@ GIT
     authlogic (2.1.6)
       activesupport
 
+GIT
+  remote: git://github.com/ceritium/careerjetr.git
+  revision: b2b170bcc83912ba180b66a557047f2b64241f81
+  specs:
+    careerjetr (0.1.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -90,6 +96,7 @@ PLATFORMS
 
 DEPENDENCIES
   authlogic!
+  careerjetr!
   rails (= 3.0.3)
   sqlite3-ruby
   taps

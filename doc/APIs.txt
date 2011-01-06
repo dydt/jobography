@@ -1,6 +1,40 @@
 Indeed:
 	URL: https://ads.indeed.com/jobroll/xmlfeed
-	Format: http request, xml response
+	Format: http request, (xml|json) response
 	Provides: title, company, location, date, desc, url
 	Issues: must be queried by title and location -- query in real time and cache?
+	Attribution: 
+<span id=indeed_at><a href="http://www.indeed.com/">jobs</a> by <a
+href="http://www.indeed.com/" title="Job Search"><img
+src="http://www.indeed.com/p/jobsearch.gif" style="border: 0;
+vertical-align: middle;" alt="Indeed job search"></a></span>
+	Click Tracking:
+<script type="text/javascript"
+src="http://www.indeed.com/ads/apiresults.js"></script>
 	
+CareerJet:
+	URL: http://www.careerjet.ca/partners/api/ (links to a git repo)
+	Format:
+	Provides: 
+	Issues:
+	
+Simply Hired:
+	URL: http://www.simplyhired.com/a/publishers/overview
+	Format:
+	Provides:
+	Issues:
+
+Facebook:
+	URL: http://developers.facebook.com/docs/guides/web
+	     http://developers.facebook.com/docs/api
+	Format:
+	Provides:
+	Issues:
+
+LinkedIn:
+	URL: http://developer.linkedin.com/community/apis
+	Format:
+	Provides:
+	Issues
+
+
