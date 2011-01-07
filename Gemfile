@@ -29,5 +29,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'taps'
 gem 'authlogic', :git => "git://github.com/binarylogic/authlogic.git"
 gem 'careerjetr', :git => "git://github.com/ceritium/careerjetr.git"
+gem 'json'
+gem 'sanitize'
 
 # end
