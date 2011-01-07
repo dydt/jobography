@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107000943) do
+ActiveRecord::Schema.define(:version => 20110107055507) do
 
   create_table "jobs", :force => true do |t|
     t.string   "title"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110107000943) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "job_type"
+    t.string   "orig_id"
   end
 
   create_table "users", :force => true do |t|

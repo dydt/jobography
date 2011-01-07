@@ -40,6 +40,8 @@ class IndeedScraper
       return []
     end
     
+    puts resp
+    
     jsonResults = JSON.parse(resp)
     return [] unless jsonResults
     
@@ -48,6 +50,7 @@ class IndeedScraper
       j.title = o['jobtitle']
       j.job_type = type
       j.company = o['company']
+      j.orig_id = o['jobkey']
       j.pay = -1
       j.date = o['date']
       j.source = o['url']
@@ -61,7 +64,7 @@ class IndeedScraper
       j.city = o['city']
       j.zip = -1
       
-      return j
+      j
     end
   end
 end
