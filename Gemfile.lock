@@ -100,7 +100,10 @@ PLATFORMS
 
 DEPENDENCIES
   authlogic!
+<<<<<<< Updated upstream
   careerjetr!
+=======
+>>>>>>> Stashed changes
   json
   rails (= 3.0.3)
   sanitize
