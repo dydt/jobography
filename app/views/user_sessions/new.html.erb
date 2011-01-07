@@ -1,6 +1,6 @@
-<h1>UserSessions#new</h1>
+<h1>UserSession#new</h1>
 
-<% form_for @user_session do |f| %>
+<%= form_for @user_session, :url => user_session_path do |f| %>
    <%= f.label :email %><br />
    <%= f.text_field :email %><br />
    <br />
@@ -8,4 +8,4 @@
    <%= f.password_field :password %><br />
    <br />
    <%= f.submit "Login" %>
- <% end %>
+<% end %>

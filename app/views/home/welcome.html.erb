@@ -18,13 +18,11 @@
 		var center = new google.maps.LatLng(39.109, -94.589);
 
 		if (navigator.geolocation) {
-		  browserSupportFlag = true;
 		  navigator.geolocation.getCurrentPosition(function(position) {
 		    center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 		    map.setCenter(center);
 		  }, function() {});
 		}
-		
 		
 		var options = {
 			zoom: 4,
@@ -39,5 +37,7 @@
 		}
 	}
 </script>
+
+<br/><br/>
 
 <div id="map" style="width:750px; height:500px; margin:auto" />

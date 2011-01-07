@@ -4,7 +4,7 @@ Six470::Application.routes.draw do
 
   resources :users
   
-  resources :user_sessions
+  resource :user_session, :only => [:new, :create, :destroy]
 
   get "home/welcome"
   
