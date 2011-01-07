@@ -7,31 +7,43 @@ class IndeedScraper
   # API docs at https://ads.indeed.com/jobroll/xmlfeed
 
   def initialize
-    @baseURL = 'http://api.indeed.com/ads/apisearch'
-  
-    @pubID = '2514334929527745'
-    @apiV = 2
-    @format = 'json'
-    @co = 'us'
-    @chnl = ''
-    @latlong = '1'
-  
-    # These need to be set dynamically, eventually
-    @userip = '1.2.3.4'
-    @useragent = 'Mozilla/%2F4.0%28Firefox%29'
+    @baseURL = 'http://api.indeed.com/ads/apisearch?'
+    
+    @params = { :publisher => '2514334929527745',
+      :v => 2,
+      :format => 'json',
+      :co => 'us',
+      :chnl => '',
+      :latlong => '1',
+      :userip => '127.0.0.1',
+      :useragent => 'Mozilla//4.0(Firefox)'
+    }
   end
   
-  def search(query, location, type, limit)
-    # TODO: Error handle the shit out of this
-    qURL = "#{@baseURL}?publisher=#{@pubID}&v=#{@apiV}&format=#{@format}&q=#{CGI::escape(query)}" +
-            "&l=#{CGI::escape(location)}&limit=#{limit}&co=#{@co}&chnl=#{@chnl}&userip=#{@userip}" +
-            "&latlong=#{@latlong}&useragent=#{@useragent}&jt=#{type}"
+  def search(query, location, type, limit, params = {})    
+    params = @params.merge(params)
+    params[:q] = query
+    params[:l] = location
+    params[:jt] = type
+    params[:limit] = limit
+    
+    qURL = @baseURL
+    params.each_pair do |k, v| 
+      qURL += "#{CGI::escape(k.to_s)}=#{CGI::escape(v.to_s)}&"
+    end
+        
     url = URI.parse(qURL)
-    resp = Net::HTTP.get(url)
+    resp = ''
+    begin
+      resp = Net::HTTP.get(url)
+    rescue Net::HTTPError
+      return []
+    end
     
     jsonResults = JSON.parse(resp)
-    results = []
-    jsonResults['results'].each do |o|
+    return [] unless jsonResults
+    
+    jsonResults['results'].map do |o|
       j = Job.new
       j.title = o['jobtitle']
       j.job_type = type
@@ -43,15 +55,14 @@ class IndeedScraper
       j.desc = Sanitize.clean(o['snippet'], Sanitize::Config::RESTRICTED)
       j.desc.gsub! /\n/, ''
       
-      j.lat = Float(o['latitude'])
-      j.long = Float(o['longitude'])
+      j.lat = o['latitude']
+      j.long = o['longitude']
       j.state = o['state']
       j.city = o['city']
       j.zip = -1
       
-      results.push(j)
+      return j
     end
-    return results
   end
 end
     
