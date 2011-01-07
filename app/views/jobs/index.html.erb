@@ -1,0 +1,5 @@
+<h1>Job#display</h1>
+
+<% @jobs.each do |job| %>
+	<p><%= link_to job.title, job, %></p>
+<% end %>

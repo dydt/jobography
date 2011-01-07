@@ -1,6 +1,6 @@
 Six470::Application.routes.draw do
 
-  get "job/display"
+  resources :jobs
 
   resources :users
   
