@@ -1,12 +1,14 @@
 class JobsController < ApplicationController
-  def display
+  def show
+    @job = Job.find(params[:id])
   end
 
   def index
     @jobs = Job.all
   end
 
-  def expand
+  def json
+    render :json => Job.find(params[:id])
   end
 
 # Trying to create a distinction between showing a marker on the map for a job and showing the job in a text box.  Both of those depend on the job fulfilling the search query.

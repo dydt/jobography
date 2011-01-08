@@ -1,6 +1,8 @@
 Six470::Application.routes.draw do
 
   resources :jobs
+  
+  match 'jobs/:id/json' => 'jobs#json'
 
   resources :users
   

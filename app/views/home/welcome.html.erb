@@ -28,7 +28,7 @@
     <% @rand_jobs.each do |job| %>
       new google.maps.Marker({
         position: new google.maps.LatLng(<%= job.lat %>, <%= job.long %>),
-        title: "<%= job.title %>"
+        title: "<%= "#{job.title} - #{job.company}" %>"
       }),
     <% end %>
     ];

@@ -1,0 +1,7 @@
+<h1>Job#display</h1>
+<h2><%= "#{@job.title} - #{@job.company}" %></h2>
+
+<p>Location: <%= "#{@job.city}, #{@job.state}"%></p>
+<p>Description: <%= @job.desc %></p>
+<p>Type: <%= @job.job_type %></p>
+<p>Source: <%= link_to @job.source, @job.source %></p>

@@ -39,9 +39,7 @@ class IndeedScraper
     rescue Net::HTTPError
       return []
     end
-    
-    puts resp
-    
+        
     jsonResults = JSON.parse(resp)
     return [] unless jsonResults
     
