@@ -11,11 +11,17 @@
 
 <div id="login">
   <% if current_user %>
-    Hello <%= current_user.firstName %> <%= current_user.lastName %> <br/>
+    Hello, <%= current_user.firstName %> <%= current_user.lastName %> <br/>
     <%= link_to '[Log out]', logout_path, :method => 'delete' %>
   <% else %>
     <%= link_to '[Log in]', login_path %>
   <% end %>
+</div>
+
+<div id="header">
+  <h1 id="greeting"> <%= link_to 'Welcome!', root_path %> </h1>
+  <%= link_to 'User list', users_path,%>
+  <%= link_to 'Job list', jobs_path,%>
 </div>
 
 <%= yield %>
