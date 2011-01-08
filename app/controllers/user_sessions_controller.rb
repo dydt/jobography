@@ -9,7 +9,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      render :inline => "Success"
+      redirect_to :root
     else
       render :inline => "Failure"
     end
@@ -17,7 +17,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy
-    redirect_to new_user_session_url
+    redirect_to :root
   end
 
 end
