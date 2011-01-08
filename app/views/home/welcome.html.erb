@@ -1,8 +1,41 @@
-<h1>Welcome!</h1>
-<%= link_to 'User list', users_url,%>
-<%= link_to 'Job list', jobs_url,%>
+<div id="header">
+	<h1 id="greeting">Welcome!</h1>
+	<%= link_to 'User list', users_url,%>
+	<%= link_to 'Job list', jobs_url,%>
+</div>
 
 <%= javascript_include_tag "http://maps.google.com/maps/api/js?sensor=false" %>
+<%= javascript_include_tag 'konami.js' %>
+
+<script type="text/javascript">
+	konami = new Konami();
+	konami.code = function() {
+		var vis = ['none', 'block'];
+		var i = 0;
+		
+		var greeting = document.getElementById("greeting");
+		greeting.innerHTML = "Greetings, human!";
+		greeting.style.textDecoration = "blink";
+		
+		/* Inject cornify (www.cornify.com), code lifted from their bookmarklet */
+    var files = ['http://cornify.com/js/cornify.js','http://cornify.com/js/cornify_run.js'];
+    var k = document.createElement('div');
+    k.id = '__cornify_nodes';
+    document.getElementsByTagName('body')[0].appendChild(k);
+    for (var l = 0; l < files.length; l++) {
+      j = document.createElement('script');
+      j.src = files[l];
+      k.appendChild(j);
+    }
+		
+		cornify_add();		
+		
+		setInterval(function() {
+			document.getElementById("map").style.display =  vis[(i++)%2];
+		}, 500);
+	}
+  konami.load();
+</script>
 
 <script type="text/javascript">
 	window.onload = function() {
@@ -40,4 +73,4 @@
 
 <br/><br/>
 
-<div id="map" style="width:750px; height:500px; margin:auto" />
+<div id="map" style="width:750px; height:500px; margin:auto" > </div>
