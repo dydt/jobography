@@ -13,39 +13,39 @@
 ActiveRecord::Schema.define(:version => 20110107055507) do
 
   create_table "jobs", :force => true do |t|
-    t.string   "title"
-    t.string   "company"
-    t.float    "pay"
-    t.datetime "date"
-    t.string   "source"
-    t.string   "desc"
-    t.float    "lat"
-    t.float    "long"
-    t.string   "state"
-    t.string   "city"
-    t.string   "zip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "job_type"
-    t.string   "orig_id"
+    t.string    "title"
+    t.string    "company"
+    t.float     "pay"
+    t.timestamp "date"
+    t.string    "source"
+    t.string    "desc"
+    t.float     "lat"
+    t.float     "long"
+    t.string    "state"
+    t.string    "city"
+    t.string    "zip"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "job_type"
+    t.string    "orig_id"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "firstName"
-    t.string   "lastName"
-    t.string   "email"
-    t.string   "crypted_password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "salt"
-    t.string   "persistence_token"
-    t.integer  "login_count",        :default => 0
-    t.integer  "failed_login_count", :default => 0
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
+    t.string    "firstName"
+    t.string    "lastName"
+    t.string    "email"
+    t.string    "crypted_password"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "salt"
+    t.string    "persistence_token"
+    t.integer   "login_count",        :default => 0
+    t.integer   "failed_login_count", :default => 0
+    t.timestamp "last_request_at"
+    t.timestamp "current_login_at"
+    t.timestamp "last_login_at"
+    t.string    "current_login_ip"
+    t.string    "last_login_ip"
   end
 
 end
