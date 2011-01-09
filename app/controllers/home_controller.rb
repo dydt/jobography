@@ -2,9 +2,11 @@ class HomeController < ApplicationController
 
   def welcome
     @rand_jobs = []
-    [10, Job.count].min.times do
+    count = [30, Job.count].min
+    while @rand_jobs.length < count
       i = rand(Job.count)
-      @rand_jobs.push(Job.first(:offset => i))
+      j = Job.first(:offset => i)
+      @rand_jobs.push(j) if j.lat
     end
   end
 

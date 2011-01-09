@@ -24,15 +24,6 @@
   }
 
   function loadmap() {
-    var markers = [
-    <% @rand_jobs.each do |job| %>
-      new google.maps.Marker({
-        position: new google.maps.LatLng(<%= job.lat %>, <%= job.long %>),
-        title: "<%= "#{job.title} - #{job.company}" %>"
-      }),
-    <% end %>
-    ];
-    
     var center = new google.maps.LatLng(39.109, -94.589);
 
     if (navigator.geolocation) {
@@ -45,13 +36,23 @@
     var options = {
       zoom: 4,
       center: center,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      panControl: true,
+      mapTypeControl: false,
+      streetViewControl: true
     };
     
     var map = new google.maps.Map(document.getElementById("map"), options);
     
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map)
+    for (var i = 510; i < 520; i++) {
+      $.getJSON('http://localhost:3000/jobs/'+i+'/json', function(data) {
+        var marker = new google.maps.Marker({
+          map: map,
+          animation: google.maps.Animation.DROP,
+          position: new google.maps.LatLng(data.job.lat, data.job.long),
+          title: data.job.title + ' - ' + data.job.company
+        });
+      });
     }
   }
 </script>
