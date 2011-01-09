@@ -23,7 +23,11 @@ class SimplyhiredScraper
     }
   end
 
-  def search(query, location, limit, queryparams = {}, params = {}) #This API does not allow searching by job type, but returns it in the results
+  def search(query, location, limit, queryparams = {}, params = {})
+    # Limitations:
+    # => This API does not allow searching by job type, but returns it in the results
+    # => Will fail if limit = 1
+    # => Requires location to be of the form 'city, state'
     params = @params.merge(params)
     queryparams = @queryparams.merge(queryparams)
     queryparams[:q] = query
@@ -53,10 +57,10 @@ class SimplyhiredScraper
 
     o = Nokogiri::Slop(resp)
     return [] unless o
-
+    
     rsary = o.shrs.rs.r
     results = []
-    for i in (0...rsary.length) do       # Won't work if the number of results returned is 1.
+    for i in (0...rsary.length) do       # Format is different if limit = 1, this breaks
       j = Job.new
       j.title = rsary[i].jt.content
       j.company = rsary[i].cn.content
