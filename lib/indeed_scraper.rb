@@ -48,13 +48,13 @@ class IndeedScraper
       j.title = o['jobtitle']
       j.job_type = type
       j.company = o['company']
-      j.orig_id = o['jobkey']
+      j.orig_id = 'indeed-' + o['jobkey']
       j.pay = -1
       j.date = o['date']
       j.source = o['url']
       
       j.desc = Sanitize.clean(o['snippet'], Sanitize::Config::RESTRICTED)
-      j.desc.gsub! /\n/, ''
+      j.desc.gsub! /\n/, ' '
       
       j.lat = o['latitude']
       j.long = o['longitude']

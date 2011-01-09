@@ -27,7 +27,7 @@ class CareerjetScraper
     
     results = []
 
-    o = Careerjetr.new(@language, @params)
+    o = Careerjetr.new(@language, params)
     o.jobs.each do |h|
       j = Job.new
       j.title = h['title']
@@ -35,18 +35,13 @@ class CareerjetScraper
       j.pay = h['salary']
       j.source = h['url']
       j.date = h['date']
-      j.orig_id = -1
+      j.orig_id = 'careerjet-' + h['url'].match(/\/(\w*)\.html/)[1]
     
-      if h['description'] 
-        j.desc = Sanitize.clean(h['description'], Sanitize::Config::RESTRICTED)
-      else 
-        j.desc = ''
-      end
+      j.desc = Sanitize.clean((h['description'] or ''), Sanitize::Config::RESTRICTED)
 
-      j.desc.gsub! /\n/
+      j.desc.gsub! /\n/, ' '
     
-      j.city = (h['locations'].split(','))[0]
-      j.state = (h['locations'].split(','))[1]
+      j.city, j.state = (h['locations'].split(', '))
       j.zip = -1
 
       results.push(j)
