@@ -8,10 +8,18 @@ class UserSessionsController < ApplicationController
 
   def create
     @user_session = UserSession.new(params[:user_session])
-    if @user_session.save
-      redirect_to :root
-    else
-      render :inline => "Failure"
+    @user_session.save do |result|
+      if result
+        redirect_to :root
+      else
+        render :action => confirm
+        return
+        if @user_session.errors.on(:user)
+          render :action => :confirm
+        else
+          render :action => :new
+        end
+      end
     end
   end
 
