@@ -20,9 +20,13 @@ CareerJet:
 	
 Simply Hired:
 	URL: http://www.simplyhired.com/a/publishers/overview
-	Format:
+	Format: XML
 	Provides:
 	Issues:
+	Attribution: <div style="text-align: right;"><a STYLE="text-decoration:none" href="http://www.simplyhired.com/"><span style="color: rgb(0, 0, 0);">Jobs</span></a> by <a STYLE="text-decoration:none" href="http://www.simplyhired.com/"><span style="color: rgb(0, 159, 223); font-weight: bold;">Simply</span><span style="color: rgb(163, 204, 64); font-weight: bold;">Hired</span></a></div>
+	Click Tracking: 
+< href="..." onMouseDown="xml_sclk(this);">View Job</a>
+<script type="text/javascript" src="http://api.simplyhired.com/c/jobs-api/js/xml-v2.js"></script>
 
 Facebook:
 	URL: http://developers.facebook.com/docs/guides/web
