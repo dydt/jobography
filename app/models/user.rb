@@ -1,9 +1,21 @@
 class User < ActiveRecord::Base
-  validates_presence_of :firstName, :lastName, :email, :crypted_password, :salt, :persistence_token, :login_count, :failed_login_count
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable, :lockable and :timeoutable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible  :name, :email, :password, :password_confirmation, :remember_me
+  validates_presence_of :name
   validates_uniqueness_of :email
   
-  acts_as_authentic do |c|
-    c.crypted_password_field = :crypted_password
-    c.password_salt_field = :salt
+  def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
+    data = access_token['extra']['user_hash']
+    if user = User.find_by_email(data["email"])
+      user
+    else # Create an user with a stub password. 
+      User.create!(:email => data["email"], :password => Devise.friendly_token[0,20]) 
+    end
   end
+  
 end

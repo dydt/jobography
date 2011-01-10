@@ -10,12 +10,19 @@
 </head>
 <body>
 
+<% if notice or alert %>
+<div id="notice">
+  <p><%= notice %></p>
+  <p><%= alert %></p>
+</div>
+<% end %>
+
 <div id="login">
-  <% if current_user %>
-    Hello, <%= current_user.firstName %> <%= current_user.lastName %> <br/>
-    <%= link_to '[Log out]', logout_path, :method => 'delete' %>
+  <% if user_signed_in? %>
+    Hello, <%= current_user.name %> <br/>
+    <%= link_to '[Log out]', destroy_user_session_path %>
   <% else %>
-    <%= link_to '[Log in]', login_path %>
+    <%= link_to '[Log in]', new_user_session_path %>
   <% end %>
 </div>
 
