@@ -1,5 +1,5 @@
 <h2>Confirm</h2>
-<% form {:action => new_user_path, :method => post} %>
+<% form_tag :controller => 'user_sessions', :action => 'new', :method => 'post' do %>
   <% transfer = case session[:auth_method] %>
     <% when "oauth" %>
       <% %w(_key _token _secret auth_method oauth_provider) %>
@@ -9,6 +9,6 @@
   <% transfer.each do |hidden| %>
     <%= hidden_field_tag hidden.to_sym, session[hidden.to_sym] %>
   <% end %>
-  <%= hidden_field_tag :authentication_type, 'user' %>
+  <%= hidden_field_tag :authentication_type, 'session' %>
   <%= text_field_tag 'user[email]'%>
 <% end %>

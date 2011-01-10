@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
       if result
         redirect_to :root
       else
-        render :action => confirm
+        render :action => :confirm
         return
         if @user_session.errors.on(:user)
           render :action => :confirm

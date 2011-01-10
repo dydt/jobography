@@ -17,13 +17,16 @@
   <br />
   <%= f.label :password %><br />
   <%= f.password_field :password %><br />
+
   <br />
-  Or, login with openid:
-  <%= hidden_field_tag(:authentication_type, 'user') %>
-  <%= radio_button_tag :oauth_provider, 'facebook', 'Facebook' %>
-  <%= f.label :facebook %>
-  <%= radio_button_tag :oauth_provider, 'linked_in', 'LinkedIn' %>
-  <%= f.label :linkedin %>
+  Or, login with OAuth:
+  <%= oauth_login_hidden_input %>
+  <%= radio_button_tag :oauth_provider, 'facebook' %>
+  <%= label_tag :oauth_provider_facebook, 'Facebook' %>
+  <%= radio_button_tag :oauth_provider, 'linked_in' %>
+  <%= label_tag :oauth_provider_linked_in, 'LinkedIn' %>
+  <br />
+  
   <br />
   <%= f.submit "Login" %>
 <% end %>
