@@ -12,9 +12,10 @@
 <div id="login">
   <% if current_user %>
     Hello, <%= current_user.firstName %> <%= current_user.lastName %> <br/>
-    <%= link_to '[Log out]', logout_path, :method => 'delete' %>
+    <%= link_to 'log out', logout_path, :method => 'delete' %>
   <% else %>
-    <%= link_to '[Log in]', login_path %>
+    <%= link_to 'sign up'%>
+    <%= link_to 'log in', login_path %>
   <% end %>
 </div>
 
@@ -22,6 +23,9 @@
   <h1 id="greeting"> <%= link_to 'Welcome!', root_path %> </h1>
   <%= link_to 'User list', users_path,%>
   <%= link_to 'Job list', jobs_path,%>
+</div>
+
+<div id="footer">
 </div>
 
 <%= yield %>
