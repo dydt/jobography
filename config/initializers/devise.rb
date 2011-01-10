@@ -1,12 +1,16 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
+  config.omniauth :facebook, "154786507905802", "e812e0a5876c5812440648578b98aff7"
+  config.omniauth :linked_in, "3qcWfnMhLdFiHCHLhA9YuAudUL5_Di-IBkb-5A75J8VqjSzOk7J-Nz1nEhOhu6ge",
+      "_fzN_wIEVqoMyWmnprovAFc5QJqEoD543JOby2tQ2Ftuk3CgYZegV8q5r5cNhwht"
+  
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in DeviseMailer.
-  config.mailer_sender = "mboyd@mit.edu"
+  #config.mailer_sender = "mboyd@mit.edu"
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = "Devise::Mailer"
+  #config.mailer = "Devise::Mailer"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and

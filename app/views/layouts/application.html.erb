@@ -22,7 +22,9 @@
     Hello, <%= current_user.name %> <br/>
     <%= link_to '[Log out]', destroy_user_session_path %>
   <% else %>
-    <%= link_to '[Log in]', new_user_session_path %>
+    <%= link_to '[Log in]', new_user_session_path %> <br />
+    <%= link_to '[Log in with Facebook]', user_omniauth_authorize_path(:facebook)%>
+    <%= link_to '[Log in with LinkedIn]', user_omniauth_authorize_path(:linked_in)%>
   <% end %>
 </div>
 

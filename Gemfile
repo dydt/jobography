@@ -11,5 +11,6 @@ gem 'sanitize'
 
 gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 gem 'omniauth'
+gem 'oa-oauth', :require => 'omniauth/oauth'
 
 # end

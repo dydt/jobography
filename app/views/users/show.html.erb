@@ -2,7 +2,7 @@
 
 <p>
 	<%= link_to 'Edit', :action => 'edit' %> 
-	<%= link_to 'Delete', @user, :method => :delete %>
+	<%= link_to 'Delete', @user, :method => 'delete' %>
 </p>
 
-<p><%= @user.firstName %> <%= @user.lastName %> : <%= @user.email %></p>
+<p><%= @user.name %> : <%= @user.email %></p>

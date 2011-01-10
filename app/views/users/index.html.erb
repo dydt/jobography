@@ -5,5 +5,5 @@
 <br />
 
 <% @users.each do |user| %>
-	<p><%= link_to user.firstName+' '+user.lastName, user, :action =>'edit' %></p>
+	<p><%= link_to user.name, user, :action =>'edit' %></p>
 <% end %>

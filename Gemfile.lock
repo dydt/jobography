@@ -157,6 +157,7 @@ DEPENDENCIES
   careerjetr!
   devise!
   json
+  oa-oauth
   omniauth
   rails (= 3.0.3)
   sanitize

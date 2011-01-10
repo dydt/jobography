@@ -14,7 +14,24 @@ class User < ActiveRecord::Base
     if user = User.find_by_email(data["email"])
       user
     else # Create an user with a stub password. 
-      User.create!(:email => data["email"], :password => Devise.friendly_token[0,20]) 
+      User.create!(:name => access_token['user_info']['name'],
+                    :email => data["email"], 
+                    :password => Devise.friendly_token[0,20]) 
+    end
+  end
+  
+  def self.find_for_linked_in_oauth(access_token, signed_in_resource=nil)
+    # FIXME - there's no way to get the user's email through linkedIn.
+    # Make something up for now.
+    logger.warn access_token
+    data = access_token['user_info']
+    logger.warn data
+    if false #user = User.find_by_email(data["email"])
+      user
+    else # Create an user with a stub password. 
+      User.create!(:name => data['first_name'] + data['last_name'],
+            :email => Devise.friendly_token[0,5] + '@example.com',
+            :password => Devise.friendly_token[0,20]) 
     end
   end
   
