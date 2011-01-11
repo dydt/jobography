@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110110180018) do
+ActiveRecord::Schema.define(:version => 20110110234907) do
 
   create_table "jobs", :force => true do |t|
     t.string    "title"
@@ -44,9 +44,13 @@ ActiveRecord::Schema.define(:version => 20110110180018) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "facebook_uuid"
+    t.integer  "linked_in_uuid"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["facebook_uuid"], :name => "index_users_on_facebook_uuid"
+  add_index "users", ["linked_in_uuid"], :name => "index_users_on_linked_in_uuid"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end
