@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <h1></h1>
   <link rel=StyleSheet href="../../../public/stylesheets/home.css" type="text/css"></link>
+  <script type="text/javascript" src="jquery"></script>
+
+  <script>
+    if ($.browser.webkit) { $(".jqTransformInputInner div input").css("padding-top","10px");}
+    //if ($.browser.webkit) { $input.css('marginTop', 1); }   
+  </script>
 </head>
 
 <body>
   <div id="logo">
+  <h1>Logo Goes Here</h1>
   </div>
 
   <div id="inputform" action=""  method="get">
   <form>
-    <input id="query" type="text" name="query"/> near
+    <input id="query" type="text" name="query" /> near
     <input id="location" type="text" name="location" value="location (optional)">
-    <input id="submit" type="submit" value="go!" /><br />
+    <input id="submit" type="submit" value="go!" /><br /> 
   </form>
   </div>
 
-  <div id ="infotext">
-    <p></p>
+  <div id="infotext">
+    <p>We're amazing.  Use our website!</p>
+  </div>
+
+  <div id="aboutus">
+    <p>Let's talk about us!</p>
   </div>
 </body>
