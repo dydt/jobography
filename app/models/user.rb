@@ -9,30 +9,34 @@ class User < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :email
   
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if (lidata = session["devise.linked_in_data"])
+        user.name = lidata['user_info']['first_name'] + ' ' + lidata['user_info']['last_name']
+        user.linked_in_uuid = lidata['uid']
+      end
+      
+      # Facebook data takes precedence
+      if (fbdata = session["devise.facebook_data"])
+        user.name = fbdata['user_info']['name']
+        user.email = fbdata['extra']['user_hash']['email']
+        user.facebook_uuid = fbdata['uid']
+      end
+    end
+  end
+  
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
-    data = access_token['extra']['user_hash']
-    if user = User.find_by_email(data["email"])
+    if user = User.find_by_facebook_uuid(access_token['uid'])
       user
-    else # Create an user with a stub password. 
-      User.create!(:name => access_token['user_info']['name'],
-                    :email => data["email"], 
-                    :password => Devise.friendly_token[0,20]) 
+    else
+      return nil
     end
   end
   
   def self.find_for_linked_in_oauth(access_token, signed_in_resource=nil)
     # FIXME - there's no way to get the user's email through linkedIn.
-    # Make something up for now.
-    logger.warn access_token
-    data = access_token['user_info']
-    logger.warn data
-    if false #user = User.find_by_email(data["email"])
-      user
-    else # Create an user with a stub password. 
-      User.create!(:name => data['first_name'] + data['last_name'],
-            :email => Devise.friendly_token[0,5] + '@example.com',
-            :password => Devise.friendly_token[0,20]) 
-    end
+    # Need to do an extra api call to get uid.
+    return nil
   end
   
 end
