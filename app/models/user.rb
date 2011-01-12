@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         
+  serialize :linked_in_access_token, OAuth::AccessToken
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible  :name, :email, :password, :password_confirmation, :remember_me
@@ -10,11 +12,13 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   def self.new_with_session(params, session)
+    logger.debug session
     super.tap do |user|
       logger.debug session
       if (lidata = session["devise.linked_in_data"])
         user.name = lidata['user_info']['first_name'] + ' ' + lidata['user_info']['last_name']
         user.linked_in_id = lidata['uid']
+        user.linked_in_access_token = lidata['extra']['access_token']
       end
       
       # Facebook data takes precedence
@@ -22,22 +26,17 @@ class User < ActiveRecord::Base
         user.name = fbdata['user_info']['name']
         user.email = fbdata['extra']['user_hash']['email']
         user.facebook_id = fbdata['uid']
+        user.facebook_access_token = fbdata['credentials']['token']
       end
     end
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
-    if user = User.find_by_facebook_id(access_token['uid'])
-      user
-    else
-      return nil
-    end
+    User.find_by_facebook_id(access_token['uid'])
   end
   
   def self.find_for_linked_in_oauth(access_token, signed_in_resource=nil)
-    # FIXME - there's no way to get the user's email through linkedIn.
-    # Need to do an extra api call to get uid.
-    return nil
+    User.find_by_linked_in_id(access_token['uid'])
   end
   
 end
