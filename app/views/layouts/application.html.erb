@@ -3,9 +3,7 @@
 <head>
   <title>Six470</title>
   <%= stylesheet_link_tag :all %>
-  <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Inconsolata" %>
   <%= javascript_include_tag :defaults %>
-  <%= javascript_include_tag 'jquery-1.4.4.min.js' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -22,9 +20,8 @@
     Hello, <%= current_user.name %> <br/>
     <%= link_to '[Log out]', destroy_user_session_path %>
   <% else %>
-    <%= link_to '[Log in]', new_user_session_path %> <br />
-    <%= link_to '[Log in with Facebook]', user_omniauth_authorize_path(:facebook)%>
-    <%= link_to '[Log in with LinkedIn]', user_omniauth_authorize_path(:linked_in)%>
+    <%= link_to '[Log in]', new_user_session_path %> / 
+    <%= link_to '[Sign up]', new_user_registration_path %>
   <% end %>
 </div>
 

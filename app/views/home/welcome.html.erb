@@ -44,8 +44,10 @@
     
     var map = new google.maps.Map(document.getElementById("map"), options);
     
+    var joburl = '<%= jobs_url %>/';
+    
     for (var i = 510; i < 520; i++) {
-      $.getJSON('http://localhost:3000/jobs/'+i+'/json', function(data) {
+      $.getJSON(joburl+i+'/json', function(data) {
         var marker = new google.maps.Marker({
           map: map,
           animation: google.maps.Animation.DROP,

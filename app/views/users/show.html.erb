@@ -2,7 +2,9 @@
 
 <p>
 	<%= link_to 'Edit', :action => 'edit' %> 
-	<%= link_to 'Delete', @user, :method => 'delete' %>
+	<%= link_to 'Delete', @user, :method => :delete %>
 </p>
 
-<p><%= @user.name %> : <%= @user.email %></p>
+<p><%= @user.name %>  (<%= @user.email %>)</p>
+<p><strong>Facebook ID:</strong> <%= @user.facebook_id %></p>
+<p><strong>LinkedIn ID:</strong> <%= @user.linked_in_id %></p>
