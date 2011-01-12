@@ -11,22 +11,23 @@ class User < ActiveRecord::Base
   
   def self.new_with_session(params, session)
     super.tap do |user|
+      logger.debug session
       if (lidata = session["devise.linked_in_data"])
         user.name = lidata['user_info']['first_name'] + ' ' + lidata['user_info']['last_name']
-        user.linked_in_uuid = lidata['uid']
+        user.linked_in_id = lidata['uid']
       end
       
       # Facebook data takes precedence
       if (fbdata = session["devise.facebook_data"])
         user.name = fbdata['user_info']['name']
         user.email = fbdata['extra']['user_hash']['email']
-        user.facebook_uuid = fbdata['uid']
+        user.facebook_id = fbdata['uid']
       end
     end
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
-    if user = User.find_by_facebook_uuid(access_token['uid'])
+    if user = User.find_by_facebook_id(access_token['uid'])
       user
     else
       return nil

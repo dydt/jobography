@@ -2,7 +2,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.find_for_facebook_oauth(env["omniauth.auth"], current_user)
 
-    if false #@user.persisted?
+    if @user
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
       sign_in_and_redirect @user, :event => :authentication
     else
@@ -14,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def linked_in
     @user = User.find_for_linked_in_oauth(env["omniauth.auth"], current_user)
 
-    if @user.persisted?
+    if @user
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "LinkedIn"
       sign_in_and_redirect @user, :event => :authentication
     else
