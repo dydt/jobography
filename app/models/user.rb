@@ -12,9 +12,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   def self.new_with_session(params, session)
-    logger.debug session
     super.tap do |user|
-      logger.debug session
       if (lidata = session["devise.linked_in_data"])
         user.name = lidata['user_info']['first_name'] + ' ' + lidata['user_info']['last_name']
         user.linked_in_id = lidata['uid']
