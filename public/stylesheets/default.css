@@ -15,3 +15,9 @@ div#header {
 div#header h1 a {
   text-decoration: none;
 }
+
+div#footer {
+  text-align:center;
+  width:98%;
+  bottom: 0px;
+}
