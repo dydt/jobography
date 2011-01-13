@@ -1,7 +1,8 @@
 Six470::Application.routes.draw do
 
   match "search/results" => "search#results", :as => :results
-  match "search" => "search#search", :as => :search  
+
+  match "search" => "search#search", :as => :search
 
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
 

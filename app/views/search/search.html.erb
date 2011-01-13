@@ -4,8 +4,8 @@
 </div>
 
 <script>
-var q = "<%= q %>";
-var l = "<%= l %>";
+var q = "<%= @query %>";
+var l = "<%= @location %>";
 var query_path = "<%= results_path %>";
 
 function loadMap() {
@@ -32,21 +32,22 @@ function loadMap() {
 }
 
 function loadResults(map) {
-  $.ajax({url : query_path,
-          type : 'get',
-          data : {'q' : q, 'l' : l},
-          
-          success : function(results, req, status) {
-             for (var i = 0; i < results.length; i++) {
-                r = results[i]
-                var marker = new google.maps.Marker({
-                  map: map,
-                  animation: google.maps.Animation.DROP,
-                  position: new google.maps.LatLng(r.lat, r.long),
-                  title: r.title + ' - ' + r.company
-                });
-              }
-          }
+  $.ajax({
+    url : query_path,
+    type : 'get',
+    data : {'q' : q, 'l' : l},
+    
+    success : function(results, req, status) {
+      for (var i = 0; i < results.length; i++) {
+        r = results[i].job
+        var marker = new google.maps.Marker({
+          map: map,
+          animation: google.maps.Animation.DROP,
+          position: new google.maps.LatLng(r.lat, r.long),
+          title: r.title + ' - ' + r.company
+        });
+      }
+    }
   });
 }
 
