@@ -13,6 +13,13 @@
   <p><%= notice %></p>
   <p><%= alert %></p>
 </div>
+
+<script type="text/javascript">
+setTimeout(function() {
+  $("div#notice").slideUp('slow')
+}, 3000);
+</script>
+
 <% end %>
 
 <div id="login">

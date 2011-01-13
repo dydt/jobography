@@ -1,3 +1,9 @@
+div#notice {
+  width: 100%;
+  background: yellow;
+  height: 1.5em;
+}
+
 div#login {
   float: right;
   margin-top:5px;
