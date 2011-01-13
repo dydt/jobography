@@ -7,7 +7,13 @@ class SearchController < ApplicationController
   
   def results
     # Gets called by ajax, returns results as json
+    require 'indeed_scraper' 
     @query = params[:query]
     @location = params[:location]
+
+    idsr = IndeedScraper.new
+    api_results = idsr.search(@query, @location, '', 25)
+    logger.debug api_results
+    render :json => api_results    
   end
 end
