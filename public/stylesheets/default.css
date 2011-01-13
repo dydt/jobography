@@ -9,15 +9,6 @@ div#login {
   margin-top:5px;
 }
 
-div#header {
-  padding-bottom: 10px;
-  border-bottom: 1px solid gray;
-}
-
-div#header h1 a {
-  text-decoration: none;
-}
-
 div#footer {
   text-align:center;
   width:98%;

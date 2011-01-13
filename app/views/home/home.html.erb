@@ -1,33 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel=StyleSheet href="../../../public/stylesheets/home.css" type="text/css"></link>
-  <script type="text/javascript" src="jquery"></script>
+<div id="logo">
+<h1>Logo Goes Here</h1>
+</div>
 
-  <script>
-    if ($.browser.webkit) { $(".jqTransformInputInner div input").css("padding-top","10px");}
-    //if ($.browser.webkit) { $input.css('marginTop', 1); }   
-  </script>
-</head>
+<div id="inputform">
+<%= form_tag search_path, :method => "get" do %>
+  <%= text_field_tag :query, "query" %> near
+  <%= text_field_tag :location, "location (optional)" %>
+  <%= submit_tag "go!" %><br /> 
+<% end %>
+</div>
 
-<body>
-  <div id="logo">
-  <h1>Logo Goes Here</h1>
-  </div>
-
-  <div id="inputform" action=""  method="get">
-  <form>
-    <input id="query" type="text" name="query" /> near
-    <input id="location" type="text" name="location" value="location (optional)">
-    <input id="submit" type="submit" value="go!" /><br /> 
-  </form>
-  </div>
-
-  <div id="infotext">
-    <p>We're amazing.  Use our website!</p>
-  </div>
-
-<%= yield %>
-
-</body>
-</html>
+<div id="infotext">
+  <p>We're amazing.  Use our website!</p>
+</div>

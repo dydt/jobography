@@ -1,5 +1,8 @@
 Six470::Application.routes.draw do
 
+  match "search/:query" => "search#search"
+  match "search" => "search#search", :as => :search
+
   devise_for :users, :controllers => {:omniauth_callbacks => "users/omniauth_callbacks"}
 
   resources :jobs
@@ -10,6 +13,6 @@ Six470::Application.routes.draw do
 
   get "home/welcome"
   
-  root :to => "home#welcome"
+  root :to => "home#home"
   
 end
