@@ -9,6 +9,13 @@ div#login {
   margin-top:5px;
 }
 
+div#map {
+  width: 100%;
+  height: 600px;
+  margin: 0;
+}
+
+
 div#footer {
   text-align:center;
   width:98%;

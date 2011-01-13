@@ -1,8 +1,8 @@
 class SearchController < ApplicationController
   def search
     # Render a static-ish template with javascript to fetch the actual results
-    @query = params[:query]
-    @location = params[:location]
+    @q = params[:q]
+    @l = params[:l]
   end
   
   def results

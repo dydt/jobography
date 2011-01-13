@@ -4,8 +4,8 @@
 
 <div id="inputform">
 <%= form_tag search_path, :method => "get" do %>
-  <%= text_field_tag :query, "query" %> near
-  <%= text_field_tag :location, "location (optional)" %>
+  <%= text_field_tag :q, "query" %> near
+  <%= text_field_tag :l, "location (optional)" %>
   <%= submit_tag "go!" %><br /> 
 <% end %>
 </div>
