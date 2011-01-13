@@ -24,5 +24,13 @@ Six470::Application.configure do
   config.action_dispatch.best_standards_support = :builtin
   
   config.action_mailer.default_url_options = {:host => 'localhost:3000'}
+  
+  Devise.setup do |config|
+    config.omniauth :facebook, "154786507905802", "e812e0a5876c5812440648578b98aff7",
+                        :scope => "offline_access,email,user_work_history,friends_work_history"
+    config.omniauth :linked_in, "3qcWfnMhLdFiHCHLhA9YuAudUL5_Di-IBkb-5A75J8VqjSzOk7J-Nz1nEhOhu6ge",
+        "_fzN_wIEVqoMyWmnprovAFc5QJqEoD543JOby2tQ2Ftuk3CgYZegV8q5r5cNhwht"
+  end
+  
 end
 
