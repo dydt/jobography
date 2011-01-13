@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110112211652) do
+ActiveRecord::Schema.define(:version => 20110113232708) do
 
   create_table "jobs", :force => true do |t|
     t.string    "title"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20110112211652) do
     t.string   "facebook_id"
     t.string   "linked_in_id"
     t.string   "facebook_access_token"
-    t.string   "linked_in_access_token"
+    t.text     "linked_in_access_token", :limit => 255
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
