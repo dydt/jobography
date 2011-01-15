@@ -48,7 +48,14 @@ function loadResults(map) {
           map: map,
           animation: google.maps.Animation.DROP,
           position: new google.maps.LatLng(r.lat, r.long),
-          title: r.title + ' - ' + r.company
+          title: r.title + ' - ' + r.company 
+        });
+        var contentString = '<strong><a href="'+r.source+'">'+r.title+'</a></strong><br />'+r.company+'<br />'+r.desc+'<br /><em>'+r.city+', '+r.state+'</em>'+' '+r.date;
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.open(map, marker);
         });
         bounds.extend(marker.position);
       }
