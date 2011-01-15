@@ -10,13 +10,6 @@ var query_path = "<%= results_path %>";
 
 function loadMap() {
   var center = new google.maps.LatLng(39.109, -94.589);
-
-  /*if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      center = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      map.setCenter(center);
-    }, function() {});
-  }*/
   
   var options = {
     zoom: 4,
@@ -40,27 +33,39 @@ function loadResults(map) {
     success : function(results, req, status) {
       var bounds = new google.maps.LatLngBounds();
       for (var i = 0; i < results.length; i++) {
-        r = results[i].job;
-        if (r.lat == null || r.long == null) {
+        job = results[i].job;
+        
+        if (job.lat == null || job.long == null) {
           continue;
         }
+        
         var marker = new google.maps.Marker({
           map: map,
           animation: google.maps.Animation.DROP,
-          position: new google.maps.LatLng(r.lat, r.long),
-          title: r.title + ' - ' + r.company 
+          position: new google.maps.LatLng(job.lat, job.long),
+          title: job.title + ' - ' + job.company 
         });
-        var contentString = '<strong><a href="'+r.source+'">'+r.title+'</a></strong><br />'+r.company+'<br />'+r.desc+'<br /><em>'+r.city+', '+r.state+'</em>'+' '+r.date;
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.open(map, marker);
-        });
+        
+        createInfoWindow(job, marker, map);
+        
         bounds.extend(marker.position);
       }
       map.fitBounds(bounds);
     }
+  });
+}
+
+function createInfoWindow(job, marker, map) {
+  var contentString = '<strong><a href="'+job.source+'">' + 
+      job.title+'</a></strong><br />'+job.company+'<br />'+
+      job.desc+'<br /><em>'+job.city+', '+job.state+'</em>'+' '+job.date;
+  
+  marker.infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  
+  google.maps.event.addListener(marker, 'click', function() {
+    marker.infowindow.open(map, marker);
   });
 }
 
