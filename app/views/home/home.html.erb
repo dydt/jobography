@@ -1,11 +1,11 @@
 <div id="logo">
-<h1>Logo Goes Here</h1>
+<h1>Jobography</h1>
 </div>
 
 <div id="inputform">
 <%= form_tag search_path, :method => "get" do %>
-  <%= text_field_tag :q, "query" %> near
-  <%= text_field_tag :l, "location (optional)" %>
+  <%= text_field_tag :q, "", {:placeholder => "What", :autofocus => "true"} %> near
+  <%= text_field_tag :l, "", {:placeholder => "where (optional)"} %>
   <%= submit_tag "go!" %><br /> 
 <% end %>
 </div>

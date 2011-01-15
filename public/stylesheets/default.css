@@ -21,3 +21,8 @@ div#footer {
   width:98%;
   bottom: 0px;
 }
+
+div.login_form {
+  margin: 50px auto;
+  width: 500px;
+}

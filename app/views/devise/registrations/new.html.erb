@@ -1,5 +1,6 @@
-<h2>Sign up</h2>
+<h1>Create an account</h1>
 
+<div class="login_form">
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
   
@@ -17,19 +18,21 @@
 	<% end %>
 	</p>
   
-  <p><%= f.label :name %>
-  <%= f.text_field :name %>
+  <p><%= f.label :name %><br />
+  <%= f.text_field :name , {:autofocus => '', :required => 'true'}%>
 
   <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
+  <%= f.text_field :email, {:type => 'email', :required => 'true'} %></p>
 
   <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+  <%= f.password_field :password, {:required => 'true'} %></p>
 
   <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
+  <%= f.password_field :password_confirmation, {:required => 'true'} %></p>
 
   <p><%= f.submit "Sign up" %></p>
 <% end %>
 
 <%= render :partial => "devise/shared/links" %>
+
+</div>
