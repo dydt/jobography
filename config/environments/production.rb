@@ -51,7 +51,8 @@ Six470::Application.configure do
   
   Devise.setup do |config|
      config.omniauth :facebook, "175496645820829", "c368a6007e6851c6c730ce2710305e0f",
-                         :scope => "offline_access,email,user_work_history,friends_work_history"
+                         :scope => "offline_access,email,user_work_history,friends_work_history," +
+                                   "user_location,friends_location"
      config.omniauth :linked_in, "3qcWfnMhLdFiHCHLhA9YuAudUL5_Di-IBkb-5A75J8VqjSzOk7J-Nz1nEhOhu6ge",
          "_fzN_wIEVqoMyWmnprovAFc5QJqEoD543JOby2tQ2Ftuk3CgYZegV8q5r5cNhwht"
    end
