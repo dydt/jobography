@@ -10,7 +10,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110113232708) do
+ActiveRecord::Schema.define(:version => 20110115234434) do
+
+  create_table "employments", :force => true do |t|
+    t.string   "employer"
+    t.string   "title"
+    t.string   "location"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "contact_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "facebook_contacts", :force => true do |t|
+    t.string   "facebook_id"
+    t.string   "name"
+    t.string   "location"
+    t.integer  "work_history_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "jobs", :force => true do |t|
     t.string    "title"
