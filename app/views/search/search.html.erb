@@ -38,15 +38,21 @@ function loadResults(map) {
     data : {'q' : q, 'l' : l},
     
     success : function(results, req, status) {
+      var bounds = new google.maps.LatLngBounds();
       for (var i = 0; i < results.length; i++) {
-        r = results[i].job
+        r = results[i].job;
+        if (r.lat == null || r.long == null) {
+          continue;
+        }
         var marker = new google.maps.Marker({
           map: map,
           animation: google.maps.Animation.DROP,
           position: new google.maps.LatLng(r.lat, r.long),
           title: r.title + ' - ' + r.company
         });
+        bounds.extend(marker.position);
       }
+      map.fitBounds(bounds);
     }
   });
 }
