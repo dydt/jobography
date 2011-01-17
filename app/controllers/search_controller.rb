@@ -5,6 +5,7 @@ class SearchController < ApplicationController
     # Render a static-ish template with javascript to fetch the actual results
     @query = params[:q]
     @location = params[:l]
+    @delayLoad = params[:delayLoad]
   end
   
   def results

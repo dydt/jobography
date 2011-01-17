@@ -7,6 +7,10 @@
 var q = "<%= @query %>";
 var l = "<%= @location %>";
 var query_path = "<%= results_path %>";
+var delayLoad = "<%= @delayLoad %>";
+
+var map;
+var markers = [];
 
 function loadMap() {
   var center = new google.maps.LatLng(39.109, -94.589);
@@ -20,11 +24,13 @@ function loadMap() {
     streetViewControl: true
   };
   
-  var map = new google.maps.Map($("div#map").get(0), options);
-  loadResults(map);
+  map = new google.maps.Map($("div#map").get(0), options);
+  if (delayLoad == '') {
+    loadResults(map);
+  }
 }
 
-function loadResults(map) {
+function loadResults() {
   $.ajax({
     url : query_path,
     type : 'get',
@@ -49,10 +55,19 @@ function loadResults(map) {
         createInfoWindow(job, marker, map);
         
         bounds.extend(marker.position);
+        
+        markers.push(marker);
       }
+      map.panToBounds(bounds);
       map.fitBounds(bounds);
     }
   });
+}
+
+function clearResults() {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
 }
 
 function createInfoWindow(job, marker, map) {

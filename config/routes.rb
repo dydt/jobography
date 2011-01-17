@@ -12,8 +12,6 @@ Six470::Application.routes.draw do
 
   resources :users
 
-  get "home/welcome"
-  
-  root :to => "home#home"
-  
+  get "home/home"
+    
 end

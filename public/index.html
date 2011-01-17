@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<head>
+	<title>Jobography</title>
+	<style>
+	
+	body {
+	  margin: 0;
+	}
+	
+	div#window {
+	  width: 100%;
+	  height: 100%;
+	  overflow: hidden;
+	}
+	
+	div#frame {
+	  width: 200%;
+	  position: relative;
+	}
+	
+	iframe {
+	  width: 50%;
+	  height: 100%;
+	  border: none;
+	}
+	
+	#home {	  
+	  float: left;
+	}
+	
+	#mapView {
+	  float: left;
+	}
+	
+	</style>
+	
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'> </script>
+	
+	<script>
+	function transitionToResults() {
+	  if (false) {
+	    $('div#frame').animate({
+	      left: '-100%'
+	    }, '500', function() {});
+    } else { 
+	    $('div#frame').css({
+	      '-webkit-transition': 'left .5s ease',
+  	    left: '-100%'
+  	  });
+    }
+	}
+	
+	function transitionToHome() {
+	  if (false) {
+	    $('div#frame').animate({
+	      left: '0'
+	    }, '500', function() {});
+    } else { 
+	    $('div#frame').css({
+	      '-webkit-transition': 'left .5s ease',
+  	    left: '0'
+  	  });
+    }
+	}
+
+	
+	window.onload = function() {
+	  var home = $('iframe#home').contents().get(0);
+	  document.title = home.title;
+	  
+	  $('form', home).submit(function(evt) {
+	    var mapView = $('iframe#mapView').contents().get(0).defaultView;
+	    var q = $('form input#q', home).val();
+	    var l = $('form input#l', home).val();
+	  
+	    mapView.q = q;
+	    mapView.l = l;
+	    
+	    mapView.loadResults();
+	    history.pushState({q : q, l : l}, mapView.title, mapView.location);
+	    transitionToResults();
+    
+      evt.preventDefault();
+	  });
+	}
+	
+	window.onpopstate = function(event) {
+	  var mapView = $('iframe#mapView').contents().get(0).defaultView;
+	  if (event.state) {
+	    mapView.q = event.state.q;
+  	  mapView.l = event.state.l;
+  	  mapView.loadResults()
+  	  transitionToResults();
+  	} else {
+  	  mapView.clearResults();
+  	  transitionToHome();
+  	}
+	}
+	
+	</script>
+	
+</head>
+
+<body>
+
+<div id="window">
+  <div id='frame'>
+    <iframe id='home' src='http://localhost:3000/home/home'></iframe>
+
+    <iframe id='mapView' src='http://localhost:3000/search?utf8=✓&delayLoad=true'></iframe>
+  </div>
+</div>
+
+</body>
+</html>
