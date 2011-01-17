@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  require 'net/https'
+  require 'cgi'
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
@@ -10,6 +13,7 @@ class User < ActiveRecord::Base
   attr_accessible  :name, :email, :password, :password_confirmation, :remember_me
   validates_presence_of :name
   validates_uniqueness_of :email
+
   
   def self.new_with_session(params, session)
     super.tap do |user|
@@ -28,6 +32,26 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  def import_fb_contacts
+    token = self.facebook_access_token
+  
+    uri = URI.parse(URI.encode("https://graph.facebook.com/#{self.facebook_id}?access_token=#{token}"))
+    
+    #url = "/#{self.facebook_id}?access_token=#{token}"
+    http = Net::HTTP.new('graph.facebook.com', 443)
+    http.use_ssl = true
+
+    request = Net::HTTP::Get.new(uri.request_uri)
+
+    response = http.request(request)
+   # begin
+   #   resp = Net::HTTP.get('https://graph.facebook.com', url)
+   # rescue Net::HTTPError
+   #   return []
+   # end
+  end
+    
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     User.find_by_facebook_id(access_token['uid'])
