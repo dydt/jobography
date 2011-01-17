@@ -16,12 +16,14 @@ div#map {
 }
 
 div.marker {
+  max-width: 400px;
+  font-size: 10pt;
 }
 
 div#footer {
-  text-align:center;
-  width:98%;
-  bottom: 0px;
+  text-align: center;
+  width: 98%;
+  bottom:  0px;
 }
 
 div.login_form {

@@ -71,9 +71,9 @@ function clearResults() {
 }
 
 function createInfoWindow(job, marker, map) {
-  var contentString = '<div class="marker"><strong><a href="'+job.source+'">' + 
+  var contentString = '<div class="marker"><p><strong><a href="'+job.source+'">' + 
       job.title+'</a></strong><br />'+job.company+'<br />'+
-      job.desc+'<br /><em>'+job.city+', '+job.state+'</em>'+' '+job.date+"</div>";
+      job.desc+'<br /><em>'+job.city+', '+job.state+'</em>'+' '+job.date+"</p></div>";
   
   marker.infowindow = new google.maps.InfoWindow({
     content: contentString
