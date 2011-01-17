@@ -26,6 +26,12 @@ div#inputform {
   -webkit-box-sizing: content-box;
 }
 
+input#q, input#l {
+  height: 2em;
+  width: 12em;
+  margin: 5px;
+}
+
 div#inputform #submit {
 }
 

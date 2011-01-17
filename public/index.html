@@ -38,29 +38,15 @@
 	
 	<script>
 	function transitionToResults() {
-	  if (false) {
-	    $('div#frame').animate({
-	      left: '-100%'
-	    }, '500', function() {});
-    } else { 
-	    $('div#frame').css({
-	      '-webkit-transition': 'left .5s ease',
-  	    left: '-100%'
-  	  });
-    }
+    $('div#frame').animate({
+      left: '-100%'
+    }, '700', function() {});
 	}
 	
 	function transitionToHome() {
-	  if (false) {
-	    $('div#frame').animate({
-	      left: '0'
-	    }, '500', function() {});
-    } else { 
-	    $('div#frame').css({
-	      '-webkit-transition': 'left .5s ease',
-  	    left: '0'
-  	  });
-    }
+    $('div#frame').animate({
+      left: '0%'
+    }, '700', function() {});
 	}
 
 	
@@ -77,7 +63,8 @@
 	    mapView.l = l;
 	    
 	    mapView.loadResults();
-	    history.pushState({q : q, l : l}, mapView.title, mapView.location);
+	    var url = '/search?utf8=✓&q='+q+'&l='+l;
+	    history.pushState({q : q, l : l}, mapView.title, url);
 	    transitionToResults();
     
       evt.preventDefault();
@@ -105,9 +92,9 @@
 
 <div id="window">
   <div id='frame'>
-    <iframe id='home' src='http://localhost:3000/home/home'></iframe>
+    <iframe id='home' src='/home/home'></iframe>
 
-    <iframe id='mapView' src='http://localhost:3000/search?utf8=✓&delayLoad=true'></iframe>
+    <iframe id='mapView' src='/search?utf8=✓&amp;delayLoad=true'></iframe>
   </div>
 </div>
 
