@@ -12,9 +12,9 @@
 </div>
 
 <div id="recent">
-  <p>How about <a href="#">animal husbandry near Topeka?</a></p>
-  <p>Or maybe <a href="#">software development near Albuquerque?</a></p>
-  <p id="more"><a href="#">Show more recent searches</a></p>
+  <p>How about <%= raw recent_search_link(@recent_searches[0]) %></p>
+  <p>Or maybe <%= raw recent_search_link(@recent_searches[1])%></p>
+<!-->  <p id="more"><a href="#">Show more recent searches</a></p> </!-->
 </div>
 
 <div id="infotext">

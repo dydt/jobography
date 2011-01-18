@@ -12,6 +12,12 @@ class SearchController < ApplicationController
     # Gets called by ajax, returns results as json
     @query = params[:q]
     @location = params[:l]
+    
+    search = Search.new
+    search.query = @query
+    search.location = @location
+    search.user = current_user
+    search.save
 
     idsr = IndeedScraper.new
     api_results = idsr.search(@query, @location, '', 25)
