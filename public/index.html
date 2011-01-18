@@ -40,7 +40,8 @@ iframe {
 
 </style>
 	
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js'> </script>
+<script src='/javascripts/jquery.min.js'></script>
+<script src='/javascripts/urlEncode.js'></script>
 	
 <script>
 
@@ -76,27 +77,41 @@ function flipButton() {
   }
 }
 
+function handleLinks(home) {
+  $('a.recent', home).click(function(evt) {
+    evt.preventDefault();
+    var q = evt.target.getAttribute('data-q');
+    var l = evt.target.getAttribute('data-l');
+    showResults($.URLDecode(q), $.URLDecode(l));
+  });
+}
+
+function showResults(q, l) {
+  mapView.q = q;
+  mapView.l = l;
+  
+  var url = '/search?q='+q+'&l='+l;
+  history.pushState({q : q, l : l}, mapView.title, url);
+  mapView.loadResults();  // Will callback transitionToResults
+}
 
 window.onload = function() {
   var home = $('iframe#home').contents().get(0);
   document.title = home.title;
   
   $('form', home).submit(function(evt) {
+    evt.preventDefault();
+    
     loading = true;
     flipButton();
     
     var q = $('form input#q', home).val();
     var l = $('form input#l', home).val();
   
-    mapView.q = q;
-    mapView.l = l;
-    
-    mapView.loadResults();
-    var url = '/search?q='+q+'&l='+l;
-    history.pushState({q : q, l : l}, mapView.title, url);
-  
-    evt.preventDefault();
+    showResults(q, l);
   });
+  
+  handleLinks(home);
 }
 
 window.onpopstate = function(event) {
