@@ -4,12 +4,26 @@
 
 <div id="inputform">
 <%= form_tag search_path, :method => "get" do %>
-  <%= text_field_tag :q, "", {:placeholder => "What", :autofocus => "true"} %> near
+  Find me a 
+  <%= text_field_tag :q, "", {:placeholder => "what"} %> job near
   <%= text_field_tag :l, "", {:placeholder => "where (optional)"} %>
-  <%= submit_tag "go!" %><br /> 
+  <%= submit_tag "go!", {:class => "button"} %><br /> 
 <% end %>
 </div>
 
-<div id="infotext">
-  <p>We're amazing.  Use our website!</p>
+<div id="recent">
+  <p>How about <a href="#">animal husbandry near Topeka?</a></p>
+  <p>Or maybe <a href="#">software development near Albuquerque?</a></p>
+  <p id="more"><a href="#">Show more recent searches</a></p>
 </div>
+
+<div id="infotext">
+  <p>Jobography helps you find jobs where you want to live.</p>
+</div>
+
+<script>
+/*$('div#beta').mouseover(function(evt) { 
+  $('div#beta').css('-webkit-transform', 'rotate3d(.5, .86, 0, 180deg)');
+  $('div#beta').css('-webkit-transform', 'rotate3d(.5, .86, 0, 360deg)');
+});*/
+</script>
