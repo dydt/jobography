@@ -33,23 +33,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  def import_fb_contacts
-    token = self.facebook_access_token
-  
-    uri = URI.parse(URI.encode("https://graph.facebook.com/#{self.facebook_id}?access_token=#{token}"))
-    
-    #url = "/#{self.facebook_id}?access_token=#{token}"
+  def import_fb_contacts  
+    path = "/#{self.facebook_id}?access_token=#{self.facebook_access_token}"
     http = Net::HTTP.new('graph.facebook.com', 443)
     http.use_ssl = true
 
-    request = Net::HTTP::Get.new(uri.request_uri)
-
-    response = http.request(request)
-   # begin
-   #   resp = Net::HTTP.get('https://graph.facebook.com', url)
-   # rescue Net::HTTPError
-   #   return []
-   # end
+    resp = http.get(path)
+    respText = resp.body
+    
   end
     
   
