@@ -29,6 +29,7 @@ input#q, input#l {
   height: 2em;
   width: 12em;
   margin: 5px;
+  padding-left: .5em;
   border: 1px solid #777;
   border-radius: 2px;
 }
@@ -43,7 +44,6 @@ input.button {
 
 input.button:hover {
   background: #BBB;
-  -webkit-transform: rotateY(360deg);
 }
 
 div#recent {
