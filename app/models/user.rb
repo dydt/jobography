@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  require 'net/https'
-  require 'cgi'
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
