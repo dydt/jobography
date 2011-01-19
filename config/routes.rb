@@ -13,5 +13,7 @@ Six470::Application.routes.draw do
   resources :users
 
   get "home/home"
+  
+  root :to => "home#wrapper"
       
 end
