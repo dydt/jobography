@@ -1,5 +1,3 @@
-require 'URI'
-
 module HomeHelper
   def recent_search_link(search)
     q = search.query
