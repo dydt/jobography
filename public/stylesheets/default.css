@@ -1,15 +1,32 @@
+html {
+  font-family: "Myriad Pro", "Verdana", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: #00E;
+}
+
 div#notice {
   width: 100%;
   background: yellow;
   height: 1.5em;
 }
 
-div#login {
+div#logintab {
   font-size: 8pt;
-  background: #9aE;
+  z-index: 2;
   position: absolute;
+  right: 0%;
   top: 0;
-  right: 0;
+  background: #9aE;
   padding: 5px;
   border: 1px solid #777;
   border-top: none;
@@ -17,11 +34,11 @@ div#login {
   border-bottom-left-radius: 5px;
 }
 
-div#login a {
+div#logintab a {
   color: #00E;
 }
 
-div#login a:visited {
+div#logintab a:visited {
   color: #00E;
 }
 
@@ -46,6 +63,92 @@ div.marker {
   font-size: 10pt;
 }
 
+div#view {
+  overflow: hidden;
+}
+
+div#sign_in {
+  overflow: hidden;
+  width: 600px;
+  margin: 180px auto;
+}
+
+div#sign_up {
+  overflow: hidden;
+  width: 800px;
+  margin: 120px auto;
+}
+
+div#reset {
+  overflow: hidden;
+  width: 800px;
+  margin: 200px auto;
+}
+
+div#pagetitle { 
+  display: inline;
+  float: left;
+  padding: 80px 25px;
+  padding-left: 0;
+  border-right: 1px solid #777;
+}
+
+div#pagetitle h1 {
+  font-size: 30pt;
+  margin: 0;
+}
+
+div.form {
+  float: left;
+  margin: 10px 50px;
+  margin-right: 0;
+}
+
+input[type=text], input[type=email], input[type=password] {
+  height: 2em;
+  width: 12em;
+  margin: 5px;
+  padding-left: .5em;
+  border: 1px solid #777;
+  border-radius: 2px;
+}
+
+form label {
+  display: block;
+  float: left;
+  min-width: 100px;
+  margin: 9px 0;
+}
+
+input[type=submit] {
+  height: 2.5em;
+  border: 1px solid #777;
+  background: #DDD;
+  border-radius: 2px;
+  -webkit-transition: -webkit-transform 1s ease;
+}
+
+input[type=submit]:hover, input[type=submit]:active {
+  background: #BBB;
+}
+
+form p a {
+  width: 100%;
+  font-size: 10pt;
+  padding-right: 67px;
+}
+
+span#link_facebook a {
+  height: 1.5em;
+  padding-right: 30px;
+  padding-bottom: .5em;
+}
+
+img#facebook_icon, img#linkedin_icon {
+  display: inline;
+  margin-top: .5em;
+}
+
 div#footer {
   text-align: center;
   font-size: 8pt;
@@ -59,9 +162,4 @@ div#footer {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
   border-bottom: none;
-}
-
-div.login_form {
-  margin: 50px auto;
-  width: 500px;
 }

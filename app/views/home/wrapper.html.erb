@@ -1,138 +1,50 @@
 <!DOCTYPE html>
 <head>
 <title>Jobography</title>
-<style>
 
-html {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-  height: 100%;
-}
-
-div#window {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-div#frame {
-  width: 200%;
-  height: 100%;
-  position: relative;
-}
-
-iframe {
-  width: 50%;
-  height: 100%;
-  border: none;
-}
-
-#home {	  
-  float: left;
-}
-
-#mapView {
-  float: left;
-}
-
-</style>
-	
-<script src='/javascripts/jquery.min.js'></script>
-<script src='/javascripts/urlEncode.js'></script>
-	
 <script>
-
-var loading = false;
-var spincount = 0;
-
-function transitionToResults() {
-  loading = false;
-  spincount = 0;
-  $('div#frame').animate({
-    left: '-100%'
-  }, '700', function() {});
+if (window != window.top) { // In frame, need to break out
+  parent.window.location.reload(true);
 }
-
-function transitionToHome() {
-  $('div#frame').animate({
-    left: '0%'
-  }, '700', function() {});
-}
-
-function flipButton() {
-  var home = $('iframe#home').contents().get(0);
-  
-  if (spincount > 10) {
-    $('form', home).html("<span style='color:red'>" + 
-        "Sorry, it looks like something went wrong &mdash; " +
-        "please try again later.");
-  }
-  
-  var t = (++spincount)%2 * 360;
-  $('input.button', home).css('-webkit-transform', 'rotateY('+t+'deg)');
-  if (loading) {
-    setTimeout(flipButton, 1000);
-  }
-}
-
-function showResults(q, l) {
-  var mapView = $('iframe#map').contents().get(0).defaultView;
-  mapView.q = q;
-  mapView.l = l;
-  
-  var url = '/search?q='+q+'&l='+l;
-  history.pushState({q : q, l : l}, mapView.title, url);
-  mapView.loadResults();  // Will callback transitionToResults
-}
-
-window.onload = function() {
-  var home = $('iframe#home').contents().get(0);
-  document.title = home.title;
-  
-  $('form', home).submit(function(evt) {
-    evt.preventDefault();
-    
-    loading = true;
-    flipButton();
-    
-    var q = $('form input#q', home).val();
-    var l = $('form input#l', home).val();
-  
-    showResults(q, l);
-  });
-  
-  $('a.recent', home).click(function(evt) {
-    evt.preventDefault();
-    var q = evt.target.getAttribute('data-q');
-    var l = evt.target.getAttribute('data-l');
-    showResults($.URLDecode(q), $.URLDecode(l));
-  });
-}
-
-window.onpopstate = function(event) {
-  var mapView = $('iframe#map').contents().get(0).defaultView;
-  if (event.state) {
-    mapView.q = event.state.q;
-	  mapView.l = event.state.l;
-	  mapView.loadResults()
-	} else {
-	  mapView.clearResults();
-	  transitionToHome();
-	}
-}
-
 </script>
+
+<%= stylesheet_link_tag 'wrapper.css' %>
+<%= stylesheet_link_tag 'default.css' %>
+<%= stylesheet_link_tag 'home.css' %>
+
+<%= javascript_include_tag 'jquery.min.js' %>
+<%= javascript_include_tag 'urlEncode.js' %>
+<%= javascript_include_tag 'wrapper.js' %>
+
+<%= csrf_meta_tag %>
 </head>
 
 <body>
 
 <div id="window">
+  <div id="logintab">
+    <% if user_signed_in? %>
+      Hello, <%= current_user.name %> <br/>
+      <%= link_to 'Log out', destroy_user_session_path, {:id => "sign_out"} %>
+    <% else %>
+      <%= link_to 'Sign in', new_user_session_path, {:id => "sign_in"} %> |
+      <%= link_to 'Sign up', new_user_registration_path, {:id => "sign_up"} %>
+    <% end %>
+  </div>
+  
   <div id='frame'>
+    <% unless current_user %>
+      <iframe id='login' src='/users/sign_in'></iframe>
+      <iframe id='signup' src='/users/sign_up'></iframe>
+    <% end %>
+    
     <iframe id='home' src='/home/home'></iframe>
     <iframe id='map' src='/search?delayLoad=true'></iframe>
+
+  </div>
+  
+  <div id="footer">
+    <a href="mailto:mboyd@mit.edu?Subject=Jobography%20Feedback">Contact us!</a>
   </div>
 </div>
 

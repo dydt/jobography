@@ -1,16 +1,22 @@
-<h1>Sign in</h1>
+<div id="sign_in">
+  <div id="pagetitle">
+    <h1>Sign in</h1>
+  </div>
 
-<div class="login_form">
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email, {:autofocus => '', :type => "email", :required => 'true'} %></p>
+  <div class="form">
+  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <p><%= f.label :email %>
+    <%= f.text_field :email, {:type => "email", :required => 'true'} %></p>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password, {:required => 'true'} %></p>
+    <p><%= f.label :password %>
+    <%= f.password_field :password, {:required => 'true'} %></p>
 
-  <p><%= f.submit "Sign in" %></p>
-<% end %>
+    <p><%= render :partial => "devise/shared/links" %>
+      <%= f.submit "Sign in", {:class => "button"} %>
+      </p>
+  <% end %>
 
-<%= render :partial => "devise/shared/links" %>
 
+
+  </div>
 </div>

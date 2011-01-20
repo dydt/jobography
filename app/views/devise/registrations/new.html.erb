@@ -1,38 +1,57 @@
-<h1>Create an account</h1>
+<div id="sign_up">
+  <div id="pagetitle">
+    <h1>Create an account</h1>
+  </div>
 
-<div class="login_form">
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+  <div class="form">
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    
+    <% if resource.errors.any? %>
+      <div id="error_explanation">
+        <h2>Please correct <%= pluralize(resource.errors.count, "error") %>:</h2>
+        <ul>
+        <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    
+    <p>
+    <span id="link_facebook">
+      <img id='facebook_icon' src='/images/facebook.jpg' alt='Facebook'>
+    	<% if not @user.facebook_id %>
+    	  <%= link_to "Link Facebook account", user_omniauth_authorize_path(:facebook) %>
+    	<% else %>
+    	  Facebook account linked!
+    	<% end %>
+  	</span>
+  	
+  	<span id="link_linkedin">
+    	<img id='linkedin_icon' src='/images/linkedin.png' alt='LinkedIn'>
+    	<% if not @user.linked_in_id %>
+    	  <%= link_to "Link LinkedIn account", user_omniauth_authorize_path(:linked_in) %>
+    	<% else %>
+    	  LinkedIn account linked!
+    	<% end %>
+    </span>
+  	</p>
   
-  <p>
-	<% if not @user.facebook_id %>
-	  <%= link_to "Link Facebook account", user_omniauth_authorize_path(:facebook) %>
-	<% else %>
-	  Facebook account linked!
-	<% end %>
-	|
-	<% if not @user.linked_in_id %>
-	  <%= link_to "Link LinkedIn account", user_omniauth_authorize_path(:linked_in) %>
-	<% else %>
-	  LinkedIn account linked!
-	<% end %>
-	</p>
-  
-  <p><%= f.label :name %><br />
-  <%= f.text_field :name , {:autofocus => '', :required => 'true'}%>
+    <p><%= f.label :name %>
+    <%= f.text_field :name , {:required => 'true'}%>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email, {:type => 'email', :required => 'true'} %></p>
+    <p><%= f.label :email %>
+    <%= f.text_field :email, {:type => 'email', :required => 'true'} %></p>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password, {:required => 'true'} %></p>
+    <p><%= f.label :password %>
+    <%= f.password_field :password, {:required => 'true'} %></p>
 
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation, {:required => 'true'} %></p>
+    <p><%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, {:required => 'true'} %></p>
 
-  <p><%= f.submit "Sign up" %></p>
-<% end %>
+    <p><%= f.submit "Sign up" %></p>
+  <% end %>
 
-<%= render :partial => "devise/shared/links" %>
-
+  </div>
 </div>
