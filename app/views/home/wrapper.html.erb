@@ -2,6 +2,12 @@
 <head>
 <title>Jobography</title>
 
+<script>
+if (window != window.top) { // In frame, need to break out
+  parent.window.location.reload(true);
+}
+</script>
+
 <%= stylesheet_link_tag :all %>
 
 <%= javascript_include_tag 'jquery.min.js' %>
@@ -17,7 +23,7 @@
   <div id="logintab">
     <% if user_signed_in? %>
       Hello, <%= current_user.name %> <br/>
-      <%= link_to 'Log out', destroy_user_session_path %>
+      <%= link_to 'Log out', destroy_user_session_path, {:id => "sign_out"} %>
     <% else %>
       <%= link_to 'Sign in', new_user_session_path, {:id => "sign_in"} %> |
       <%= link_to 'Sign up', new_user_registration_path, {:id => "sign_up"} %>
@@ -25,10 +31,14 @@
   </div>
   
   <div id='frame'>
-    <iframe id='login' src='/users/sign_in'></iframe>
+    <% unless current_user %>
+      <iframe id='login' src='/users/sign_in'></iframe>
+      <iframe id='signup' src='/users/sign_up'></iframe>
+    <% end %>
+    
     <iframe id='home' src='/home/home'></iframe>
     <iframe id='map' src='/search?delayLoad=true'></iframe>
-    <iframe id='signup' src='/users/sign_up'></iframe>
+
   </div>
   
   <div id="footer">

@@ -79,6 +79,12 @@ div#sign_up {
   margin: 120px auto;
 }
 
+div#reset {
+  overflow: hidden;
+  width: 800px;
+  margin: 200px auto;
+}
+
 div#pagetitle { 
   display: inline;
   float: left;
@@ -122,7 +128,7 @@ input[type=submit] {
   -webkit-transition: -webkit-transform 1s ease;
 }
 
-input[type=submit]:hover {
+input[type=submit]:hover, input[type=submit]:active {
   background: #BBB;
 }
 

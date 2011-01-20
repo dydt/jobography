@@ -1,4 +1,3 @@
-
 var loading = false;
 var spincount = 0;
 
@@ -68,6 +67,7 @@ function showResults(q, l) {
 }
 
 window.onload = function() {
+  
   var home = $('iframe#home').contents().get(0);
   document.title = home.title;
   
@@ -101,6 +101,7 @@ window.onload = function() {
     history.pushState({view: 'signup'}, 'Sign Up', evt.target.getAttribute('href'));
     transitionToSignUp();
   });
+  
 }
 
 window.onpopstate = function(event) {
