@@ -10,6 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< Updated upstream
 ActiveRecord::Schema.define(:version => 20110121014752) do
 
   create_table "employments", :force => true do |t|
@@ -51,44 +52,53 @@ ActiveRecord::Schema.define(:version => 20110121014752) do
     t.string    "orig_id"
   end
 
-  create_table "searches", :force => true do |t|
-    t.string   "query"
+  create_table "linkedin_contacts", :force => true do |t|
+    t.string   "linkedin_id"
+    t.string   "name"
     t.string   "location"
-    t.integer  "user_id"
+    t.integer  "work_history_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "searches", :force => true do |t|
+    t.string    "query"
+    t.string    "location"
+    t.integer   "user_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "searches", ["created_at"], :name => "index_searches_on_created_at"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
-    t.text     "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string    "session_id", :null => false
+    t.text      "data"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
-    t.string   "reset_password_token"
-    t.string   "remember_token"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                         :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "facebook_id"
-    t.string   "linked_in_id"
-    t.string   "facebook_access_token"
-    t.text     "linked_in_access_token", :limit => 255
+    t.string    "name"
+    t.string    "email",                                 :default => "", :null => false
+    t.string    "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string    "reset_password_token"
+    t.string    "remember_token"
+    t.timestamp "remember_created_at"
+    t.integer   "sign_in_count",                         :default => 0
+    t.timestamp "current_sign_in_at"
+    t.timestamp "last_sign_in_at"
+    t.string    "current_sign_in_ip"
+    t.string    "last_sign_in_ip"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "facebook_id"
+    t.string    "linked_in_id"
+    t.string    "facebook_access_token"
+    t.text      "linked_in_access_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

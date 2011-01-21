@@ -9,6 +9,7 @@
 var q = "<%= @query %>";
 var l = "<%= @location %>";
 var query_path = "<%= results_path %>";
+var contact_path = "<%= show_fb_contacts_path %>";
 var delayLoad = "<%= @delayLoad %>";
 
 var map;
@@ -30,6 +31,18 @@ function loadMap() {
   if (delayLoad == '') {
     loadResults(map);
   }
+}
+
+function loadContacts() {
+  $.ajax({
+    url: contact_path,
+    type: 'get',
+    data: {},
+  
+    success: function(results, req, status) {
+      var geocoder = new google.maps.Geocoder
+    }
+  });  
 }
 
 function loadResults() {

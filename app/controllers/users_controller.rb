@@ -40,4 +40,12 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
 
+  def show_fb_contacts
+    if current_user
+      render :json => current_user.facebook_contacts
+    else 
+      render :json => []
+    end 
+  end
+
 end

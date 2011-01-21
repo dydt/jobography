@@ -87,6 +87,10 @@ class User < ActiveRecord::Base
     print " done\n"
     return (jsonresp or [])
   end  
+
+  def import_user_li
+    
+  end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     User.find_by_facebook_id(access_token['uid'])

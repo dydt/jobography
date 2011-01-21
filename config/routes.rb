@@ -12,6 +12,8 @@ Six470::Application.routes.draw do
 
   resources :users
 
+  match "fb_contacts" => "users#show_fb_contacts"
+
   get "home/home"
   
   root :to => "home#wrapper"
