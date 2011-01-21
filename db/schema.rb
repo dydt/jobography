@@ -10,7 +10,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< Updated upstream
 ActiveRecord::Schema.define(:version => 20110121014752) do
 
   create_table "employments", :force => true do |t|
