@@ -11,10 +11,12 @@
 <% end %>
 </div>
 
-<div id="recent">
-  <p>How about <%= raw recent_search_link(@recent_searches[0]) %></p>
-  <p>Or maybe <%= raw recent_search_link(@recent_searches[1])%></p>
-</div>
+<% if @recent_searches.length >= 2 %>
+  <div id="recent">
+    <p>How about <%= raw recent_search_link(@recent_searches[0]) %></p>
+    <p>Or maybe <%= raw recent_search_link(@recent_searches[1])%></p>
+  </div>
+<% end %>
 
 <div id="infotext">
   <p>Jobography helps you find jobs where you want to live.</p>
