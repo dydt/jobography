@@ -52,18 +52,13 @@ function flipButton() {
 function showResults(q, l) {
   var mapView = $('iframe#map').contents().get(0).defaultView;
   
-  if (mapView.q == q && mapView.l == l) {
-    transitionToResults();
-  } else {
-    mapView.clearResults();
+  var url = '/search?q='+q+'&l='+l;
+  history.pushState({view: 'results', q : q, l : l}, mapView.title, url);
 
-    var url = '/search?q='+q+'&l='+l;
-    history.pushState({view: 'results', q : q, l : l}, mapView.title, url);
-
-    mapView.q = q;
-    mapView.l = l;
-    mapView.loadResults();  // Will callback transitionToResults
-  }
+  mapView.clearResults();
+  mapView.q = q;
+  mapView.l = l;
+  mapView.loadResults();  // Will callback transitionToResults
 }
 
 window.onload = function() {
@@ -80,7 +75,7 @@ window.onload = function() {
     var q = $('form input#q', home).val();
     var l = $('form input#l', home).val();
   
-    showResults(q, l);
+    showResults(q, l, true);
   });
   
   $('a.recent', home).click(function(evt) {
@@ -110,7 +105,11 @@ window.onpopstate = function(event) {
   if (! event.state) {
 	  transitionToHome();
 	} else if (event.state.view == 'results') {
-	  showResults(event.state.q, event.state.l)
+	  if (mapView.q == event.state.q && mapView.l == event.state.l) {
+	    transitionToResults();
+	  } else {
+	    showResults(event.state.q, event.state.l) 
+	  }
 	} else if (event.state.view == 'login') {
 	  transitionToLogin();
 	} else if (event.state.view == 'signup') {

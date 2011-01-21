@@ -11,22 +11,40 @@
 <body>
 
 <% if notice or alert %>
-<div id="notice">
-  <p><%= notice %></p>
-  <p><%= alert %></p>
-</div>
+  <div id="notice">
+    <p><%= notice %></p>
+    <p><%= alert %></p>
+  </div>
 
-<script type="text/javascript">
-setTimeout(function() {
-  $("div#notice").slideUp('slow')
-}, 3000);
-</script>
-
+  <script type="text/javascript">
+  setTimeout(function() {
+    $("div#notice").slideUp('slow')
+  }, 3000);
+  </script>
 <% end %>
 
-<div id="view">
-  <%= yield %>
+<div id="logintab">
+   <% if user_signed_in? %>
+     Hello, <%= current_user.name %> <br/>
+     <%= link_to 'Log out', destroy_user_session_path, {:id => "sign_out"} %>
+   <% else %>
+     <%= link_to 'Sign in', new_user_session_path, {:id => "sign_in"} %> |
+     <%= link_to 'Sign up', new_user_registration_path, {:id => "sign_up"} %>
+   <% end %>
+ </div>
+
+
+<%= yield %>
+
+<div id="footer">
+  <a href="mailto:jobography@mit.edu?Subject=Jobography%20Feedback">Contact us!</a>
 </div>
 
+<script>
+if (window != window.top) { // In frame
+  $('div#logintab').css({display: 'none'})
+  $('div#footer').css({display: 'none'})
+}
+</script>
 </body>
 </html>

@@ -43,6 +43,8 @@ div#logintab a:visited {
 }
 
 div#header {
+  overflow: hidden;
+  width: 60px;
   font-size: 18pt;
   margin: 15px 90px;
   text-shadow: #777 4px 4px 10px;
@@ -82,6 +84,12 @@ div#sign_up {
 div#reset {
   overflow: hidden;
   width: 800px;
+  margin: 200px auto;
+}
+
+div#changepw {
+  overflow: hidden;
+  width: 700px;
   margin: 200px auto;
 }
 
