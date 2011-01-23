@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
         user.email = fbdata['extra']['user_hash']['email']
         user.facebook_id = fbdata['uid']
         user.facebook_access_token = fbdata['credentials']['token']
+        #Make delayed job that runs import_user_fb
       end
     end
   end

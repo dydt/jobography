@@ -33,14 +33,28 @@ function loadMap() {
   }
 }
 
+
 function loadContacts() {
   $.ajax({
     url: contact_path,
     type: 'get',
     data: {},
   
-    success: function(results, req, status) {
-      var geocoder = new google.maps.Geocoder
+    success : function(results, req, status) {
+      var geocoder = new google.maps.Geocoder();
+      for (var i = 0; i < results.length; i++) {
+        geocoder.geocode( {'address' : results[i].location}, function(latlngs, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            var marker = new google.maps.Marker({
+              map: map,
+              animation: google.maps.Animation.DROP,
+              position: latlngs[0].geometry.location,
+              title: results[i].name
+            });
+            markers.push(marker);
+          }
+        });
+      }
     }
   });  
 }
