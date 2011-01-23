@@ -15,6 +15,9 @@ var delayLoad = "<%= @delayLoad %>";
 var map;
 var markers = [];
 var open_windows = [];
+var index = 0;
+var contacts = [];
+
 
 function loadMap() {
   var center = new google.maps.LatLng(39.109, -94.589);
@@ -34,6 +37,23 @@ function loadMap() {
   }
 }
 
+function syncGeocoding(c) {
+  var geocoder = new google.maps.Geocoder();
+  while (c.location && !c.location == '') {
+  geocoder.geocode( {'address' : c.location}, function(latlngs, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      var marker = new google.maps.Marker({
+        map: map,
+        animation: google.maps.Animation.DROP,
+        position: latlngs[0].geometry.location,
+        title: c.name
+        });
+        markers.push(marker);
+      }
+      syncGeocoding(contacts[++index]);
+    });    
+  }
+}
 
 function loadContacts() {
   $.ajax({
@@ -42,27 +62,16 @@ function loadContacts() {
     data: {},
   
     success : function(results, req, status) {
-      var geocoder = new google.maps.Geocoder();
       for (var i = 0; i < results.length; i++) {
-        var c = results[i].facebook_contact
-        if (!c.location || c.location == '') {
-          continue;
-        }
-        geocoder.geocode( {'address' : c.location}, function(latlngs, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            var marker = new google.maps.Marker({
-              map: map,
-              animation: google.maps.Animation.DROP,
-              position: latlngs[0].geometry.location,
-              title: c.name
-            });
-            markers.push(marker);
-          }
-        });
+        contacts.push(results[i]);      
       }
+      syncGeocoding(contacts[index]);
     }
-  });  
+  });
 }
+      
+
+
 
 function loadResults() {
   $.ajax({
