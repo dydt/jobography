@@ -17,6 +17,7 @@ var markers = [];
 var open_windows = [];
 var index = 0;
 var contacts = [];
+var cmarkers = [];
 
 
 function loadMap() {
@@ -39,7 +40,6 @@ function loadMap() {
 
 function syncGeocoding(c) {
   var geocoder = new google.maps.Geocoder();
-  while (c.location && !c.location == '') {
   geocoder.geocode( {'address' : c.location}, function(latlngs, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       var marker = new google.maps.Marker({
@@ -48,11 +48,17 @@ function syncGeocoding(c) {
         position: latlngs[0].geometry.location,
         title: c.name
         });
-        markers.push(marker);
-      }
-      syncGeocoding(contacts[++index]);
-    });    
-  }
+      cmarkers.push(marker);
+    }
+    else {
+      c = c
+    }
+    if (index < contacts.length-1) {
+      setTimeout(function() {      
+        syncGeocoding(contacts[++index]);
+      }, 500);
+    }
+  });    
 }
 
 function loadContacts() {
@@ -63,7 +69,9 @@ function loadContacts() {
   
     success : function(results, req, status) {
       for (var i = 0; i < results.length; i++) {
-        contacts.push(results[i]);      
+        if (results[i].facebook_contact.location && !(results[i].facebook_contact.location == '')) {
+          contacts.push(results[i].facebook_contact);      
+        }
       }
       syncGeocoding(contacts[index]);
     }
