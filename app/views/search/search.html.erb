@@ -14,6 +14,7 @@ var delayLoad = "<%= @delayLoad %>";
 
 var map;
 var markers = [];
+var open_windows = [];
 
 function loadMap() {
   var center = new google.maps.LatLng(39.109, -94.589);
@@ -58,7 +59,6 @@ function loadContacts() {
             markers.push(marker);
           }
         });
-        break;
       }
     }
   });  
@@ -116,6 +116,10 @@ function createInfoWindow(job, marker, map) {
   });
   
   google.maps.event.addListener(marker, 'click', function() {
+    while (open_windows.length > 0) {
+      open_windows.pop().close();
+    }
+    open_windows.push(marker.infowindow);
     marker.infowindow.open(map, marker);
   });
 }
