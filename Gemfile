@@ -14,4 +14,6 @@ gem 'omniauth'
 
 gem 'jquery-rails'
 
+gem 'delayed_job'
+
 # end
