@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     
     self.save
   end
-  handle_asynchronously :import_user_fb
+  handle_asynchronously :import_facebook_data
   
   def parse_fb_contact(r)
     c = FacebookContact.new
