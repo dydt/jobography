@@ -1,7 +1,5 @@
 class User < ActiveRecord::Base
 
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          
@@ -32,13 +30,17 @@ class User < ActiveRecord::Base
         user.email = fbdata['extra']['user_hash']['email']
         user.facebook_id = fbdata['uid']
         user.facebook_access_token = fbdata['credentials']['token']
-        #Make delayed job that runs import_user_fb
       end
     end
   end
+  
+  def after_save
+    if facebook_contacts == []
+      import_facebook_data  # Asynchronous task
+    end
+  end
 
-
-  def import_user_fb  
+  def import_facebook_data  
     token = "access_token=#{self.facebook_access_token}"
 
     user_resp = facebook_call("/#{self.facebook_id}?fields=work&" + token)
@@ -55,6 +57,7 @@ class User < ActiveRecord::Base
     
     self.save
   end
+  handle_asynchronously :import_facebook_data
   
   def parse_fb_contact(r)
     c = FacebookContact.new
