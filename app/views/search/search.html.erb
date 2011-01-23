@@ -43,17 +43,22 @@ function loadContacts() {
     success : function(results, req, status) {
       var geocoder = new google.maps.Geocoder();
       for (var i = 0; i < results.length; i++) {
-        geocoder.geocode( {'address' : results[i].location}, function(latlngs, status) {
+        var c = results[i].facebook_contact
+        if (!c.location || c.location == '') {
+          continue;
+        }
+        geocoder.geocode( {'address' : c.location}, function(latlngs, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             var marker = new google.maps.Marker({
               map: map,
               animation: google.maps.Animation.DROP,
               position: latlngs[0].geometry.location,
-              title: results[i].name
+              title: c.name
             });
             markers.push(marker);
           }
         });
+        break;
       }
     }
   });  
