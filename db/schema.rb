@@ -10,31 +10,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121014752) do
+ActiveRecord::Schema.define(:version => 20110123181922) do
 
-  create_table "access_tokens", :force => true do |t|
-    t.integer   "user_id"
-    t.string    "type",       :limit => 30
-    t.string    "key"
-    t.string    "token",      :limit => 1024
-    t.string    "secret"
-    t.boolean   "active"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "access_tokens", ["key"], :name => "index_access_tokens_on_key", :unique => true
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "employments", :force => true do |t|
-    t.string    "employer"
-    t.string    "title"
-    t.string    "location"
-    t.timestamp "start_date"
-    t.timestamp "end_date"
-    t.integer   "contact_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "contact_type"
+    t.string   "employer"
+    t.string   "title"
+    t.string   "location"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer  "contact_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "contact_type"
   end
 
   create_table "facebook_contacts", :force => true do |t|
@@ -74,20 +76,20 @@ ActiveRecord::Schema.define(:version => 20110121014752) do
   end
 
   create_table "searches", :force => true do |t|
-    t.string    "query"
-    t.string    "location"
-    t.integer   "user_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "query"
+    t.string   "location"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "searches", ["created_at"], :name => "index_searches_on_created_at"
 
   create_table "sessions", :force => true do |t|
-    t.string    "session_id", :null => false
-    t.text      "data"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
@@ -110,7 +112,7 @@ ActiveRecord::Schema.define(:version => 20110121014752) do
     t.string   "facebook_id"
     t.string   "linked_in_id"
     t.string   "facebook_access_token"
-    t.text     "linked_in_access_token"
+    t.text     "linked_in_access_token", :limit => 255
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
