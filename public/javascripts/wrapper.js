@@ -1,3 +1,5 @@
+var animation_time = 500;
+
 var loading = false;
 var spincount = 0;
 
@@ -7,7 +9,7 @@ function transitionToResults() {
   $('div#frame').animate({
     left: '-100%',
     top: '-100%'
-  }, '700', function() {});
+  }, animation_time, function() {});
 }
 
 function transitionToLogin() {
@@ -16,21 +18,21 @@ function transitionToLogin() {
   $('div#frame').animate({
     left: '0%',
     top: '0%'
-  }, '700', function() {});
+  }, animation_time, function() {});
 }
 
 function transitionToSignUp() {
   $('div#frame').animate({
     left: '0%',
     top: '-200%'
-  }, '700', function() {});
+  }, animation_time, function() {});
 }
 
 function transitionToHome() {
   $('div#frame').animate({
     left: '0%',
     top: '-100%'
-  }, '700', function() {});
+  }, animation_time, function() {});
 }
 
 function flipButton() {
@@ -51,14 +53,26 @@ function flipButton() {
 
 function showResults(q, l) {
   var mapView = $('iframe#map').contents().get(0).defaultView;
+  var home = $('iframe#home').contents().get(0);
   
-  var url = '/search?q='+q+'&l='+l;
-  history.pushState({view: 'results', q : q, l : l}, mapView.title, url);
-
+  $('div#noresults', home).detach();
+  
   mapView.clearResults();
   mapView.q = q;
   mapView.l = l;
-  mapView.loadResults();  // Will callback transitionToResults
+  mapView.loadResults(function() {
+    var url = '/search?q='+q+'&l='+l;
+    history.pushState({view: 'results', q : q, l : l}, mapView.title, url);
+    transitionToResults();
+  
+  }, function(){
+    loading = false;
+    spincount = 0;
+
+    $('div#inputform', home).after('<div id="noresults" style="text-align: center">' +
+        'Sorry, we couldn\'t find any results for'+
+        ' your query.</div>');
+  });
 }
 
 window.onload = function() {
