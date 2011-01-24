@@ -12,7 +12,6 @@ var index = 0;
 var contacts = [];
 var cmarkers = [];
 
-
 function loadMap() {
   var center = new google.maps.LatLng(39.109, -94.589);
   
@@ -65,6 +64,25 @@ function loadResults(onSucess, onFailure) {
       if (results.length > 0) {
         map.panToBounds(bounds);
         map.fitBounds(bounds);
+        
+        var again_text = 'You searched for ' + q +
+              ' jobs';
+        if (l != '') {
+          again_text += ' near ' + l;
+        }
+        again_text += '.&nbsp;&nbsp;<a href="/">Search again?</a>';
+        
+        $('div#search_again').html(again_text);
+        $('div#search_again').css({display: 'block'});
+        $('div#search_again a').click(function(evt) {
+          evt.preventDefault();
+          $('div#search_again').html(
+            '<form id="search" method="get">'+
+                '<input name="q" type="text" placeholder="'+q+'">' +
+                '<input name="q" type="text" placeholder="'+l+'">' +
+                '<input type="submit" value="go!">' +
+            '</form>');
+        });
         
         onSucess();
       } else {

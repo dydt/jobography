@@ -183,11 +183,20 @@ div#footer {
 div#search_again {
   z-index: 2;
   position: absolute;
+  display: none;
   text-align: center;
   background-color: white;
+  opacity: 1;
+  -webkit-transition: opacity .3s ease;
+  border: 1px solid #777;
+  border-radius: 5px;
   padding: 5px;
-  bottom: 10px;
+  bottom: 15px;
   left: 200px
+}
+
+div#search_again:hover {
+  opacity: 1;
 }
 
 div#results_box {
