@@ -17,7 +17,12 @@ class SearchController < ApplicationController
     search.query = @query
     search.location = @location
     search.user = current_user
-    search.save
+    
+    old_search = @recent_searches = Search.order('created_at DESC').first
+    
+    if search.query != old_search.query or search.location != old_search.location
+      search.save
+    end
 
     idsr = IndeedScraper.new
     api_results = idsr.search(@query, @location, '', 25)

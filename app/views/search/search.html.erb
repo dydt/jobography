@@ -38,6 +38,24 @@ function loadMap() {
   }
 }
 
+function createContactInfoWindow(c, marker, map) {
+  var contentString = '<div class="contactWindow"><p><h4>'+c.name+
+                      '</h4></p><p><img src=graph.facebook.com/'+c.facebook_id+
+                      '/picture?type=small';
+  
+  marker.infowindow = new google.maps.InfoWindow({
+    content: contentString
+  });
+  
+  google.maps.event.addListener(marker, 'click', function() {
+    while (open_windows.length > 0) {
+      open_windows.pop().close();
+    }
+    open_windows.push(marker.infowindow);
+    marker.infowindow.open(map, marker);
+  });
+}
+
 function syncGeocoding(c) {
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode( {'address' : c.location}, function(latlngs, status) {
@@ -46,12 +64,12 @@ function syncGeocoding(c) {
         map: map,
         animation: google.maps.Animation.DROP,
         position: latlngs[0].geometry.location,
-        title: c.name
-        });
+        title: c.name,
+      });
+      createContactInfoWindow(c, marker, map);
       cmarkers.push(marker);
-    }
-    else {
-      c = c
+    } else {
+      setTimeout(function() {syncGeocoding(c)}, 500);
     }
     if (index < contacts.length-1) {
       setTimeout(function() {      
@@ -69,7 +87,8 @@ function loadContacts() {
   
     success : function(results, req, status) {
       for (var i = 0; i < results.length; i++) {
-        if (results[i].facebook_contact.location && !(results[i].facebook_contact.location == '')) {
+        var c = results[i].facebook_contact;
+        if (c.location && !(c.location == '')) {
           contacts.push(results[i].facebook_contact);      
         }
       }
@@ -77,9 +96,6 @@ function loadContacts() {
     }
   });
 }
-      
-
-
 
 function loadResults() {
   $.ajax({
@@ -103,7 +119,7 @@ function loadResults() {
           title: job.title + ' - ' + job.company 
         });
         
-        createInfoWindow(job, marker, map);
+        createJobInfoWindow(job, marker, map);
         
         bounds.extend(marker.position);
         
@@ -123,7 +139,7 @@ function clearResults() {
   markers = [];
 }
 
-function createInfoWindow(job, marker, map) {
+function createJobInfoWindow(job, marker, map) {
   var contentString = '<div class="marker"><p><strong><a href="'+job.source+'">' + 
       job.title+'</a></strong><br />'+job.company+'<br />'+
       job.desc+'<br /><em>'+job.city+', '+job.state+'</em>'+' '+job.date+"</p></div>";

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   
   has_many :facebook_contacts, :autosave => true
   has_many :employments, :as => :contact
+  
+  after_save :sync_facebook
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible  :name, :email, :password, :password_confirmation, :remember_me,
@@ -34,7 +36,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  def after_save
+  def sync_facebook
     if facebook_contacts == []
       import_facebook_data  # Asynchronous task
     end
