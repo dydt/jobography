@@ -70,8 +70,8 @@ function showResults(q, l) {
     spincount = 0;
 
     $('div#inputform', home).after('<div id="noresults" style="text-align: center">' +
-        'Sorry, we couldn\'t find any results for'+
-        ' your query.</div>');
+        'Sorry, we couldn\'t find any jobs like that.'+
+        ' Try again?</div>');
   });
 }
 

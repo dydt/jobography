@@ -6,9 +6,8 @@ html {
 }
 
 h1 {
-  font-weight: 700;
-  font-size: 2em;
-  line-height: 0;
+  font-weight: 900;
+  font-size: 1.5em;
 }
 
 body {
@@ -49,20 +48,26 @@ div#logintab a:visited {
 }
 
 div#header {
+  text-align: center;
+  font-size: px;
+  font-weight: 100;
+  line-height: 0;
   position: absolute;
-  top: -10px;
+  top: 30px;
   left: 0px;
-  height: 60px;
+  height: 35px;
   overflow: hidden;
-  font-size: 18pt;
-  text-shadow: #777 4px 4px 10px;
+  text-shadow: #777 2px 2px 8px;
   z-index: 2;
-/*  background-color: white;
+  background-color: white;
   border: 1px solid #777;
-  padding: 10px;
-  border-radius: 5px;
+  border-left: none;
+  padding: 15px;
+  padding-left: 15px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
   opacity: 0.95;
-  -webkit-transition: opacity .3s ease; */
+  -webkit-transition: opacity .3s ease;
 }
 
 div#map {
@@ -197,9 +202,9 @@ div#search_again {
   -webkit-transition: opacity .3s ease;
   border: 1px solid #777;
   border-radius: 5px;
-  padding: 7px;
+  padding: 5px;
   bottom: 15px;
-  left: 200px
+  left: 150px;
 }
 
 div#search_again:hover {
@@ -214,19 +219,35 @@ div.job_infowindow {
 
 div#results_box {
   width: 247px;
-  height: 88%;
   border: 1px solid #777;
   background-color: white;
-  z-index: 80;
+  z-index: 3;
   position: absolute;
   opacity: 0.95;
   -webkit-transition: opacity .3s ease;
   top: 30px;
-  right: 10px;
+  right: 7px;
+  bottom: 15px;
   padding: 10px; 
   border-radius: 5px;
 }
 
 div#results_box:hover {
+  opacity: 1;
+}
+
+div#toggle_contacts {
+  position: fixed;
+  background-color: white;
+  padding: 5px;
+  bottom: 15px;
+  right: 282px;
+  border-radius: 5px;
+  border: 1px solid #777;
+  opacity: 0.95;
+  -webkit-transition: opacity .3s ease;
+}
+
+div#toggle_contacts:hover {
   opacity: 1;
 }

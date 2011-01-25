@@ -107,7 +107,7 @@ function createJobInfoWindow(job, marker, map) {
   marker.infowindow = new google.maps.InfoWindow({
     content: contentString,
     zIndex: 3,
-    maxWidth: 400,
+    maxWidth: 375,
   });
   
 
