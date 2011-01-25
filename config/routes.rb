@@ -10,9 +10,9 @@ Six470::Application.routes.draw do
   
   match 'jobs/:id/json' => 'jobs#json'
 
-  resources :users
-
-  match "fb_contacts" => "users#show_fb_contacts"
+  resources :users do
+    resources :facebook_contacts, :only => [:index, :show]
+  end
 
   get "home/home"
   
