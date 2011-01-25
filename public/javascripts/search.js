@@ -53,7 +53,7 @@ function loadMap() {
   map = new google.maps.Map($("div#map").get(0), options);
   if (delayLoad == '') {
     loadResults(function(){}, function(){ 
-      alert("Sorry, we couldn't find any results for your query.");
+      alert("Sorry, we couldn't find any jobs like that.");
     });
   }
 }
@@ -279,8 +279,8 @@ function createNewSearchBox() {
     evt.preventDefault();
     $('div#search_again').html(
       '<form id="search" method="get">'+
-          '<input name="q" type="text" placeholder="'+q+'">' +
-          'near <input name="q" type="text" placeholder="'+l+'">' +
+          '<input name="q" type="text" placeholder="'+q+'" value="'+q+'">' +
+          'near <input name="l" type="text" placeholder="'+l+'" value="'+l+'">' +
           '<input type="submit" value="go!">' +
       '</form>');
   });

@@ -337,7 +337,7 @@ div#results_list li:hover {
 }
 
 p.result_title {
-  font-size: 8pt;
+  font-size: 10pt;
   font-weight: bold;
   margin-bottom: 3px;
   margin-left: 3px;
@@ -350,5 +350,5 @@ div#results_list li p.result_text {
 }
 
 p.result_text {
-  font-size: 8pt;
+  font-size: 10pt;
 }

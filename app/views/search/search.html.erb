@@ -17,7 +17,11 @@
 </div>
 
 <div id="toggle_contacts">
-  <a id="toggle" href="#">Show contacts</a>
+  <% if user_signed_in? %>
+    <a id="toggle" href="#">Show contacts</a>
+  <% else %>
+    <%= link_to 'Show Contacts', new_user_registration_path, {:id => "sign_up"} %>
+  <% end %>
 </div>
 
 <script>
