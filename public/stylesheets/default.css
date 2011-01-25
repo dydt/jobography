@@ -67,6 +67,10 @@ div#header {
   -webkit-transition: opacity .3s ease;
 }
 
+div#header:hover {
+  opacity: 1;
+}
+
 div#header h1 {
   margin: 5px;
   width: 120px;
