@@ -51,8 +51,9 @@ iframe#home {
 iframe#map {
   position: absolute;
   top: 33.3%;
-  left: 33.4%;
+  left: 33.34%;
   height: 33.4%;
+  width: 33.34;
 }
 
 iframe#signup {

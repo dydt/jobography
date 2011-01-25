@@ -2,7 +2,7 @@
 var q = "<%= @query %>";
 var l = "<%= @location %>";
 var query_path = "<%= results_path %>";
-var contact_path = "/fb_contacts";
+var contact_path = "/users/current/facebook_contacts";
 var delayLoad = "<%= @delayLoad %>";*/
 
 var map;
@@ -86,6 +86,7 @@ function handleResults(results, req, status) {
     }
     
     var marker = addResult(job, i);
+    nudgePosition(marker, job_markers);
     bounds.extend(marker.position);
     job_markers.push(marker);
   }
@@ -218,15 +219,46 @@ function addContact(c) {
     title: c.name,
     icon: '/images/marker-green.png'
   });
+  nudgePosition(marker, contact_markers);
+  contact_markers.push(marker);
+  
+  var employmentsString = '';
+  for (var i = 0; i < c.employments.length; i++) {
+    employmentsString += "<li>";
+    var e = c.employments[i];
+    
+    if (e.title) {
+      employmentsString += c.employments[i].title;
+    } else {
+      employmentsString += "<span style='opacity:.5'>(unknown)</span>";
+    }
+    
+    if (e.employer) {
+      employmentsString += " &mdash; " + e.employer;
+    }
+    
+    if (e.location) {
+      employmentsString += ", " + e.location;
+    }
+  }
+  
+  var workHistoryString = "<p class='work_history'>";
+  if (employmentsString.length > 0) {
+    workHistoryString += "Work history:<ul>"+employmentsString+"</ul>";
+  } else {
+    workHistoryString += "No work history";
+  }
+  workHistoryString += "</p>"
   
   var contentString = 
   "<div class='contact_window'>" + 
       "<div class='contact_pic'>" +
         "<img alt='contact photo' src='http://graph.facebook.com/"+c.facebook_id+
-                      "/picture?type=small'>" +
+                      "/picture?type=normal'>" +
       "<div class='contact_body'>" +
-        "<h4>"+c.name+"</h4>" +
-        "<p class='contact_text'>Lorem ipsum dolorem...</p>" +
+        "<h4><a href='http://www.facebook.com/profile.php?id="+c.facebook_id+
+          "' target='window"+c.facebook_id+"'>"+c.name+"</a></h4>" +
+        workHistoryString +
       "</div>" +
   "</div>";
     
@@ -241,8 +273,6 @@ function addContact(c) {
     open_windows.push(marker.infowindow);
     marker.infowindow.open(map, marker);
   });
-  
-  contact_markers.push(marker);
 }
 
 function setupResultsBox() {
@@ -291,6 +321,24 @@ function createNewSearchBox() {
           '<input type="submit" value="go!">' +
       '</form>');
   });
+}
+
+function nudgePosition(marker, list) {
+  var e = .00025;
+  var nudgeDistance = 0.002;  // Approximately .5 miles in degrees
+  var loc1 = marker.getPosition();
+  for (var i = 0; i < list.length; i++) {
+    var loc2 = list[0].getPosition();
+    var dlat = Math.abs(loc1.lat() - loc2.lat());
+    var dlng = Math.abs(loc1.lng() - loc2.lng());
+    if (dlat > e && dlng > e) {
+      var nlat = (Math.random() - .5) * nudgeDistance;
+      var nlng = (Math.random() - .5) * nudgeDistance;
+      
+      marker.setPosition(new google.maps.LatLng(loc1.lat()+nlat, loc1.lng()+nlng));
+      return;
+    }
+  }
 }
 
 function clearResults() {

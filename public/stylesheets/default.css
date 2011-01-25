@@ -272,6 +272,7 @@ div#results_box:hover {
 }
 
 div#results_box h2 {
+  width: 225px;
   line-height: 1em;
   padding-bottom: 7px;
   padding-top: 0;
@@ -303,7 +304,7 @@ a#toggle_results_box img {
 div#results_list {
   overflow: auto;
   position: absolute;
-  top: 57px;
+  top: 59px;
   left: 15px;
   right: 5px;
   bottom: 5px;
@@ -369,7 +370,9 @@ div.contact_window div.contact_photo img {
 }
 
 div.contact_window div.contact_body {
+  font-size: 10pt;
   float: right;
+  max-width: 300px;
 }
 
 div.contact_window h4 {
