@@ -20,6 +20,13 @@ function loadMap() {
     center: center,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     panControl: true,
+    panControlOptions: {
+      position: google.maps.ControlPosition.LEFT_CENTER
+    },
+    zoomControl: true,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.LEFT_CENTER
+    },
     mapTypeControl: false,
     streetViewControl: true
   };
@@ -93,14 +100,17 @@ function loadResults(onSucess, onFailure) {
 }
 
 function createJobInfoWindow(job, marker, map) {
-  var contentString = '<div class="marker"><p><strong><a href="'+job.source+'">' + 
+  var contentString = '<div class="job_infowindow"><p><strong><a href="'+job.source+'">' + 
       job.title+'</a></strong><br />'+job.company+'<br />'+
       job.desc+'<br /><em>'+job.city+', '+job.state+'</em>'+' '+job.date+"</p></div>";
   
   marker.infowindow = new google.maps.InfoWindow({
-    content: contentString
+    content: contentString,
+    zIndex: 3,
+    maxWidth: 400,
   });
   
+
   google.maps.event.addListener(marker, 'click', function() {
     while (open_windows.length > 0) {
       open_windows.pop().close();
