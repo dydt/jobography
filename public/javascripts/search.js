@@ -102,7 +102,7 @@ function handleResults(results, req, status) {
 function addResult(job, index) {
   var innerText = 
     "<p class=result_title><a href=\""+ job.source + "\" target='window"+index+"'>" +
-      job.title + "&mdash;" + job.company + ", " +
+      job.title + " &mdash; " + job.company + ", " +
       job.city + ", " + job.state + "</a></p>" + 
     "<p class=result_text>" + job.desc + "</p>";
   
@@ -258,7 +258,7 @@ function setupResultsBox() {
       a.attr('data-state', 'shown');
       $('img', a).attr('src', '/images/arrow-right.png');
     } else {
-      $('div#results_box').animate({right : '-251px'}, 500, null);
+      $('div#results_box').animate({right : '-253px'}, 500, null);
       a.attr('data-state', 'hidden');
       $('img', a).attr('src', '/images/arrow-left.png');
     }

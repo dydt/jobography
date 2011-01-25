@@ -24,7 +24,7 @@
     	<% if not @user.facebook_id %>
     	  <%= link_to "Link Facebook account", user_omniauth_authorize_path(:facebook) %>
     	<% else %>
-    	  Facebook account linked!
+    	  Facebook account linked
     	<% end %>
   	</span>
   	
@@ -33,7 +33,7 @@
     	<% if not @user.linked_in_id %>
     	  <%= link_to "Link LinkedIn account", user_omniauth_authorize_path(:linked_in) %>
     	<% else %>
-    	  LinkedIn account linked!
+    	  LinkedIn account linked
     	<% end %>
     </span>
   	</p>

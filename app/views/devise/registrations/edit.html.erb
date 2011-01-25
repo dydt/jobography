@@ -1,25 +1,67 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div id="sign_up">
+  <div id="pagetitle">
+    <h1>Edit account</h1>
+  </div>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <div class="form">
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name),
+      :method => :put) do |f| %>
+    
+    <% if resource.errors.any? %>
+      <div id="error_explanation">
+        <h2>Please correct <%= pluralize(resource.errors.count, "error") %>:</h2>
+        <ul>
+        <% resource.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    
+    <p>
+    <span id="link_facebook">
+      <img id='facebook_icon' src='/images/facebook.jpg' alt='Facebook'>
+    	<% if not @user.facebook_id %>
+    	  <%= link_to "Link Facebook account", user_omniauth_authorize_path(:facebook) %>
+    	<% else %>
+    	  Facebook account linked
+    	<% end %>
+  	</span>
+  	
+  	<span id="link_linkedin">
+    	<img id='linkedin_icon' src='/images/linkedin.png' alt='LinkedIn'>
+    	<% if not @user.linked_in_id %>
+    	  <%= link_to "Link LinkedIn account", user_omniauth_authorize_path(:linked_in) %>
+    	<% else %>
+    	  LinkedIn account linked
+    	<% end %>
+    </span>
+  	</p>
+  
+    <p><%= f.label :name %>
+    <%= f.text_field :name , {:required => 'true'}%>
+    
+    <p><%= f.label :email %>
+    <%= f.text_field :email, {:type => 'email', :required => 'true'} %></p>
+    
+    <p><%= f.label :password %>
+    <%= f.password_field :password, {:required => 'true'} %><br/>
+    <em style="font-size:10pt">(Leave blank if you don't want to change)</em></p>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
 
-  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password %></p>
+    <p><%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, {:required => 'true'} %></p>
+    
+    <p><%= f.label :current_password %>
+    <%= f.password_field :current_password, {:required => 'true'} %></p>
 
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
+    <p><%= f.submit "Save" %></p>
+  <% end %>
+  
+  <h3>Cancel my account</h3>
 
-  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password %></p>
+  <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure you want to delete your account?", :method => :delete %>.</p>
 
-  <p><%= f.submit "Update" %></p>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
-
-<%= link_to "Back", :back %>
+  </div>
+</div>

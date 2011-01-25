@@ -181,15 +181,20 @@ form p a {
   padding-right: 67px;
 }
 
-span#link_facebook a {
+span#link_facebook, span#link_linkedin {
+  font-size: 10pt;
+}
+
+span#link_facebook {
   height: 1.5em;
-  padding-right: 30px;
+  padding-right: 20px;
   padding-bottom: .5em;
 }
 
 img#facebook_icon, img#linkedin_icon {
   display: inline;
-  margin-top: .5em;
+  position: relative;
+  top: 4px;
 }
 
 div#footer {
@@ -274,6 +279,16 @@ div#results_box h2 {
   margin-left: 6px;
   margin-bottom: 10px;
   border-bottom: 1px solid #777;
+}
+
+a#toggle_results_box {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  overflow: hidden;
+  height: 638px;
+  width: 17px;
 }
 
 a#toggle_results_box img {
