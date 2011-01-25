@@ -193,6 +193,20 @@ function setupResultsBox() {
     job_markers[i].setIcon('/images/marker-blue.png');
     map.panTo(job_markers[i].getPosition());
   });
+  
+  $('div#results_box a#toggle_results_box').click(function(evt) {
+    evt.preventDefault();
+    var a = $('a#toggle_results_box')
+    if (a.attr('data-state') == 'hidden') {
+      $('div#results_box').animate({right : '7px'}, 700, null);
+      a.attr('data-state', 'shown');
+      $('img', a).attr('src', '/images/arrow-right.png');
+    } else {
+      $('div#results_box').animate({right : '-251px'}, 700, null);
+      a.attr('data-state', 'hidden');
+      $('img', a).attr('src', '/images/arrow-left.png');
+    }
+  });
 }
 
 function createNewSearchBox() {

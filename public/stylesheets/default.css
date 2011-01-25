@@ -267,16 +267,29 @@ div#results_box h2 {
   padding-bottom: 10px;
   padding-top: 0;
   margin: 0;
+  margin-left: 6px;
   margin-bottom: 10px;
   border-bottom: 1px solid #777;
 }
 
+a#toggle_results_box img {
+  position: absolute;
+  top: 50%;
+  margin: 0;
+  width: 17px;
+  left: -2px;
+  padding: 5px -2px;
+}
+
 div#results_list {
   overflow: auto;
+  position: absolute;
   height: 90%;
-  width: 100%;
+  left: 15px;
+  right: 5px;
   padding: 5px 0;
   margin: 0;
+  float: left;
 }
 
 div#results_list ul {
