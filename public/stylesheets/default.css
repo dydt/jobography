@@ -23,6 +23,7 @@ div#notice {
   width: 100%;
   background: yellow;
   height: 1.5em;
+  margin: 3px;
 }
 
 div#logintab {
@@ -31,7 +32,7 @@ div#logintab {
   position: absolute;
   right: 0%;
   top: 0;
-  background: #9aE;
+  background: #f2f5f6;
   padding: 5px;
   border: 1px solid #777;
   border-top: none;
@@ -196,7 +197,7 @@ div#footer {
   left: 70px;
   width: 60px;
   padding: 5px;
-  background: #9aE;
+  background: #f2f5f6;
   border: 1px solid #777;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
@@ -249,7 +250,7 @@ div#results_box {
   background-color: white;
   z-index: 3;
   position: absolute;
-  opacity: 0.85;
+  opacity: 0.90;
   -webkit-transition: opacity .3s ease;
   top: 30px;
   right: 7px;
@@ -264,7 +265,7 @@ div#results_box:hover {
 
 div#results_box h2 {
   line-height: 1em;
-  padding-bottom: 10px;
+  padding-bottom: 7px;
   padding-top: 0;
   margin: 0;
   margin-left: 6px;
@@ -290,19 +291,22 @@ div#results_list {
   padding: 5px 0;
   margin: 0;
   float: left;
-}
+  width: 100%;
+  
+} 
 
 div#results_list ul {
   padding: 0;
   margin: 0;
   margin-right: 5px;
+  font-size: 10pt;
 }
 
 div#results_list li {
   list-style-type: none;
   padding: 3px;
   border: 1px solid #FFF;
-  border-radius: 5pz;
+  border-radius: 5px;
 }
 
 div#results_list li:nth-child(2n) {
@@ -312,13 +316,20 @@ div#results_list li:nth-child(2n) {
 div#results_list li:hover {
   border: 1px solid #777;
   border-radius: 5px;
-  background: #ABF;
+  background: #f2f5f6;
 }
 
 p.result_title {
   font-size: 8pt;
   font-weight: bold;
-  margin-bottom: 0;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  margin-top: 3px;
+  padding: 3;
+}
+
+div#results_list li p.result_text {
+  margin: 3px;
 }
 
 p.result_text {
