@@ -5,8 +5,8 @@ class User < ActiveRecord::Base
          
   serialize :linked_in_access_token, OAuth::AccessToken
   
-  has_many :facebook_contacts, :autosave => true
-  has_many :employments, :as => :contact
+  has_many :facebook_contacts, :autosave => true, :dependent => :destroy
+  has_many :employments, :as => :contact, :dependent => :destroy
   
   after_save :sync_facebook
 
@@ -37,36 +37,55 @@ class User < ActiveRecord::Base
   end
   
   def sync_facebook
-    if facebook_contacts == []
-      import_facebook_data  # Asynchronous task
+    if self.facebook_contacts == [] and self.employments == []
+      import_facebook_data
     end
   end
 
   def import_facebook_data  
     token = "access_token=#{self.facebook_access_token}"
-
+    
     user_resp = facebook_call("/#{self.facebook_id}?fields=work&" + token)
     
     self.employments = user_resp['work'].map {|e| parse_employment(e) } if user_resp['work']
-  
-    friends_list = facebook_call("/#{self.facebook_id}/friends?" + token)
-    friends_paths = friends_list['data'].map do |f|
-      "/#{f['id']}?fields=id,name,location,work&" + token
-    end
-    friend_resps = friends_paths.map { |p| facebook_call(p) }
     
-    self.facebook_contacts = friend_resps.map {|r| parse_fb_contact(r) }
+    friends_list = facebook_call("/#{self.facebook_id}/friends?" + token)
+    
+    self.facebook_contacts = friends_list['data'].map do |f|
+      FacebookContact.new(:facebook_id => f['id'], :name => f['name'])
+    end
     
     self.save
   end
   handle_asynchronously :import_facebook_data
   
-  def parse_fb_contact(r)
-    c = FacebookContact.new
+  def retrieve_contact(contact_facebook_id)
+    path = "/#{contact_facebook_id}?fields=id,name,location,work&" +
+            "access_token=#{self.facebook_access_token}"
+    
+    r = facebook_call(path)
+    
+    c = FacebookContact.find_by_facebook_id(contact_facebook_id)
     c.facebook_id = r['id']
     c.name = r['name']
     c.location = r['location']['name'] if r['location']
     c.employments = r['work'].map {|e| parse_employment(e) } if r['work']
+    
+    if c.location and c.location != ''
+      r = geocode_call(c.location)
+      if r['status'] == 'OK'
+        begin
+          latlng = r['results'][0]['geometry']['location']
+          c.lat = latlng['lat']
+          c.long = latlng['lng']
+        rescue NoMethodError
+          logger.error "Failed to parse geocode response: #{r}"
+        end
+      else
+        logger.error "Failed to geocode contact #{c.name}: #{r['status']}"
+      end
+    end
+    
     return c
   end
   
@@ -79,23 +98,28 @@ class User < ActiveRecord::Base
     e.end_date = r["end_date"]
     return e
   end
-
+  
   def facebook_call(path)
-    puts path
     http = Net::HTTP.new('graph.facebook.com', 443)
     http.use_ssl = true
 
     resp = http.get(path)
     resp_text = resp.body
     
-    print '-> Parsing response...'
     jsonresp = JSON.parse(resp_text)
-    print " done\n"
     return (jsonresp or [])
   end  
+  
+  def geocode_call(address)
+    http = Net::HTTP.new('maps.googleapis.com', 80)
 
-  def import_user_li
+    resp = http.get("/maps/api/geocode/json?" +
+              "region=us&language=en&sensor=false&address=#{URI::encode address}")
+    resp_text = resp.body
     
+    jsonresp = JSON.parse(resp_text)
+    logger.debug jsonresp
+    return (jsonresp or [])
   end
   
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
