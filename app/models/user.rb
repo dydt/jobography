@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email
   
   def send_welcome_email()
-    UserMailer.deliver_welcome_email(self)
+   # UserMailer.deliver_welcome_email(self)
   end
   
   def self.new_with_session(params, session)
