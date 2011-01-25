@@ -61,12 +61,24 @@ function loadResults(onSucess, onFailure) {
           title: job.title + ' - ' + job.company 
         });
         
+        addToResultsList(job, i);
+        
         createJobInfoWindow(job, marker, map);
         
         bounds.extend(marker.position);
         
         markers.push(marker);
       }
+      
+      $('div#results_list ul#results li').mouseenter(function(evt) {
+        var i = evt.target.getAttribute("data-index");
+        markers[i].setIcon("/images/marker-blue.png");
+      });
+      
+      $('div#results_list ul#results li').mouseleave(function(evt) {
+        var i = evt.target.getAttribute("data-index");
+        markers[i].setIcon("/images/marker-red.png");
+      });
       
       if (results.length > 0) {
         map.panToBounds(bounds);
@@ -86,7 +98,7 @@ function loadResults(onSucess, onFailure) {
           $('div#search_again').html(
             '<form id="search" method="get">'+
                 '<input name="q" type="text" placeholder="'+q+'">' +
-                '<input name="q" type="text" placeholder="'+l+'">' +
+                'near <input name="q" type="text" placeholder="'+l+'">' +
                 '<input type="submit" value="go!">' +
             '</form>');
         });
@@ -97,6 +109,16 @@ function loadResults(onSucess, onFailure) {
       }
     }
   });
+}
+
+function addToResultsList(job, index) {
+  $('div#results_list ul#results').append(
+    "<li data-index=\"" + index + "\">" +
+      "<p class=result_title><a href=\""+ job.source + "\">" +
+        job.title + "&mdash;" + job.company + ", " +
+        job.city + ", " + job.state + "</a></p>" + 
+      "<p class=result_text>" + job.desc + "</p>" +
+    "</li>");
 }
 
 function createJobInfoWindow(job, marker, map) {

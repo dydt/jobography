@@ -118,7 +118,6 @@ class User < ActiveRecord::Base
     resp_text = resp.body
     
     jsonresp = JSON.parse(resp_text)
-    logger.debug jsonresp
     return (jsonresp or [])
   end
   

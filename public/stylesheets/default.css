@@ -40,7 +40,7 @@ div#logintab {
 }
 
 div#logintab a {
-  color: #00E;
+  color: #ABF;
 }
 
 div#logintab a:visited {
@@ -223,7 +223,7 @@ div#results_box {
   background-color: white;
   z-index: 3;
   position: absolute;
-  opacity: 0.95;
+  opacity: 0.85;
   -webkit-transition: opacity .3s ease;
   top: 30px;
   right: 7px;
@@ -250,4 +250,50 @@ div#toggle_contacts {
 
 div#toggle_contacts:hover {
   opacity: 1;
+}
+
+div#results_box h2 {
+  line-height: 1em;
+  padding-bottom: 10px;
+  padding-top: 0;
+  margin: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #777;
+}
+
+div#results_list {
+  overflow: auto;
+  height: 90%;
+  width: 100%;
+  padding: 5px 0;
+  margin: 0;
+}
+
+div#results_list ul {
+  padding: 0;
+  margin: 0;
+  margin-right: 5px;
+  font-size: 8pt;
+}
+
+div#results_list li {
+  list-style-type: none;
+  padding: 3px;
+  border: 1px solid #FFF;
+  border-radius: 5pz;
+}
+
+div#results_list li:nth-child(2n) {
+  background: #EEE;
+}
+
+div#results_list li:hover {
+  border: 1px solid #777;
+  border-radius: 5px;
+  background: #ABF;
+}
+
+div#results_list li p.result_title {
+  font-weight: bold;
+  margin-bottom: 0;
 }
