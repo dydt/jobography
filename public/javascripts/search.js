@@ -10,11 +10,13 @@ var map;
 var jobs = [];
 var job_markers = [];
 
+var contacts_visible = false;
 var contacts = [];
 var contact_load_index = 0;
 var contact_markers = [];
 
 var open_windows = [];
+
 
 $('div#header h1 a').click(function(evt) {
   if (window != window.top) {
@@ -22,6 +24,12 @@ $('div#header h1 a').click(function(evt) {
     window.top.history.back();
   }
 });
+
+$('div#toggle_contacts a#toggle').click(function(evt) {
+  evt.preventDefault();
+  toggleContacts();
+});
+
 
 function loadMap() {
   var center = new google.maps.LatLng(39.109, -94.589);
@@ -132,21 +140,32 @@ function addResult(job, index) {
   return marker;
 }
 
-function clearResults() {
-  for (var i = 0; i < job_markers.length; i++) {
-    job_markers[i].setMap(null);
+function toggleContacts() {
+  if (contacts_visible) {
+    $('div#toggle_contacts a').html('Show contacts');
+    for (var i = 0; i < contact_markers.length; i++) {
+      contact_markers[i].setVisible(false);
+    }
+    contacts_visible = false;
+  } else {
+    contacts_visible = true;
+    $('div#toggle_contacts a').html('Hide contacts');
+    if (contacts.length > 0) {
+      for (var i = 0; i < contact_markers.length; i++) {
+        contact_markers[i].setVisible(true);
+      }
+    } else {
+      loadContacts();
+    }
   }
-  job_markers = [];
-  
-  for (var i = 0; i < contact_markers.length; i++) {
-    contact_markers[i].setMap(null);
-  }
-  contact_markers = [];
-  
-  $('div#results_list ul').html('');
 }
 
 function loadContacts() {
+  $('div#toggle_contacts').html(
+    "<img alt='loading' style='position:relative; top:3px'" + 
+      " src='/images/spinner.gif'>&nbsp;&nbsp;" +
+    "Loading...");
+  
   $.ajax({
     url: contacts_path,
     type: 'get',
@@ -163,6 +182,13 @@ function loadContacts() {
 
 function getContacts() {
   if (contact_load_index >= contacts.length) {
+    $('div#toggle_contacts').html(
+      "<span class='fade'>Done!</span>");
+    $('div#toggle_contacts span.fade').animate({opacity: '0'}, 1000, function() {
+      $('div#toggle_contacts').html(
+        "<a id='toggle' href='#'>Hide contacts</a>");
+      $('div#toggle_contacts a#toggle').click(toggleContacts);
+    })
     return;
   }
   var c = contacts[contact_load_index]
@@ -181,12 +207,16 @@ function getContacts() {
 }
 
 function addContact(c) {
+  if (c.lat == null || c.long == null) {
+    return;
+  }
+  
   var marker = new google.maps.Marker({
     map: map,
     animation: google.maps.Animation.DROP,
     position: new google.maps.LatLng(c.lat, c.long),
     title: c.name,
-    icon: '/images/marker-red.png'
+    icon: '/images/marker-green.png'
   });
   
   var contentString = '<div class="contactWindow"><p><h4>'+c.name+
@@ -204,6 +234,8 @@ function addContact(c) {
     open_windows.push(marker.infowindow);
     marker.infowindow.open(map, marker);
   });
+  
+  contact_markers.push(marker);
 }
 
 function setupResultsBox() {
@@ -213,7 +245,7 @@ function setupResultsBox() {
       job_markers[i].setZIndex(1);
     }
     var i = $(evt.target).closest('li').get(0).getAttribute("data-index");
-    job_markers[i].setZIndex(5);
+    job_markers[i].setZIndex(20);
     job_markers[i].setIcon('/images/marker-blue.png');
     map.panTo(job_markers[i].getPosition());
   });
@@ -252,4 +284,18 @@ function createNewSearchBox() {
           '<input type="submit" value="go!">' +
       '</form>');
   });
+}
+
+function clearResults() {
+  for (var i = 0; i < job_markers.length; i++) {
+    job_markers[i].setMap(null);
+  }
+  job_markers = [];
+  
+  for (var i = 0; i < contact_markers.length; i++) {
+    contact_markers[i].setMap(null);
+  }
+  contact_markers = [];
+  
+  $('div#results_list ul').html('');
 }
