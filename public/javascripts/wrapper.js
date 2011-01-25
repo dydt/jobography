@@ -78,6 +78,7 @@ function showResults(q, l) {
 window.onload = function() {
   
   var home = $('iframe#home').contents().get(0);
+  var map = $('iframe#map').contents().get(0);
   document.title = home.title;
   
   $('form', home).submit(function(evt) {
@@ -111,6 +112,11 @@ window.onload = function() {
     transitionToSignUp();
   });
   
+  $('a#sign_up', map).click(function(evt) {
+    evt.preventDefault();
+    history.pushState({view: 'signup'}, 'Sign Up', evt.target.getAttribute('href'));
+    transitionToSignUp();
+  });
 }
 
 window.onpopstate = function(event) {
