@@ -1,8 +1,12 @@
 class FacebookContactsController < ApplicationController
   
   def index
-    @user = User.find(params[:user_id])
-    render :json => @user.facebook_contacts.map {|c| {:id => c.id, :name => c.name}}
+    @user = current_user
+    if @user
+      render :json => @user.facebook_contacts.map {|c| {:id => c.id, :name => c.name}}
+    else
+      render :json => []
+    end
   end
   
   def show

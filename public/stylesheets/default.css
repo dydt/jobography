@@ -109,7 +109,7 @@ div#sign_in {
 
 div#sign_up {
   overflow: hidden;
-  width: 800px;
+  width: 850px;
   margin: 120px auto;
 }
 
@@ -136,6 +136,10 @@ div#pagetitle {
 div#pagetitle h1 {
   font-size: 30pt;
   margin: 0;
+}
+
+div#sign_up div#pagetitle {
+  padding-left: 0px;
 }
 
 div.form {
@@ -288,11 +292,10 @@ div#results_list {
   height: 90%;
   left: 15px;
   right: 5px;
+  bottom: 5px;
   padding: 5px 0;
   margin: 0;
-  float: left;
-  width: 100%;
-  
+  float: left;  
 } 
 
 div#results_list ul {
@@ -310,7 +313,7 @@ div#results_list li {
 }
 
 div#results_list li:nth-child(2n) {
-  background: #EEE;
+  background: #F8F8F8;
 }
 
 div#results_list li:hover {

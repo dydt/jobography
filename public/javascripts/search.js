@@ -11,6 +11,7 @@ var jobs = [];
 var job_markers = [];
 
 var contacts = [];
+var contact_load_index = 0;
 var contact_markers = [];
 
 var open_windows = [];
@@ -147,24 +148,47 @@ function clearResults() {
 
 function loadContacts() {
   $.ajax({
-    url: contact_path,
+    url: contacts_path,
     type: 'get',
     data: {},
     
-    success : function(results, req, status) {
+    success: function(results, req, status) {
       for (var i = 0; i < results.length; i++) {
         contacts.push(results[i]);
-        
       }
+      getContacts();
     }
   });
 }
 
-function loadContact(id) {
-  
+function getContacts() {
+  if (contact_load_index >= contacts.length) {
+    return;
+  }
+  var c = contacts[contact_load_index]
+  $.ajax({
+    url: contacts_path + '/' + c.id,
+    type: 'get',
+    data: {},
+    
+    success: function(results, req, status) {
+      var c = results['facebook_contact']
+      contacts[contact_load_index++] = c;
+      addContact(c);
+      getContacts();
+    }
+  })
 }
 
-function createContactInfoWindow(c, marker, map) {
+function addContact(c) {
+  var marker = new google.maps.Marker({
+    map: map,
+    animation: google.maps.Animation.DROP,
+    position: new google.maps.LatLng(c.lat, c.long),
+    title: c.name,
+    icon: '/images/marker-red.png'
+  });
+  
   var contentString = '<div class="contactWindow"><p><h4>'+c.name+
                       '</h4></p><p><img src=graph.facebook.com/'+c.facebook_id+
                       '/picture?type=small';
@@ -198,11 +222,11 @@ function setupResultsBox() {
     evt.preventDefault();
     var a = $('a#toggle_results_box')
     if (a.attr('data-state') == 'hidden') {
-      $('div#results_box').animate({right : '7px'}, 700, null);
+      $('div#results_box').animate({right : '7px'}, 500, null);
       a.attr('data-state', 'shown');
       $('img', a).attr('src', '/images/arrow-right.png');
     } else {
-      $('div#results_box').animate({right : '-251px'}, 700, null);
+      $('div#results_box').animate({right : '-251px'}, 500, null);
       a.attr('data-state', 'hidden');
       $('img', a).attr('src', '/images/arrow-left.png');
     }
