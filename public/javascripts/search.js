@@ -106,7 +106,8 @@ function addResult(job, index) {
     map: map,
     animation: google.maps.Animation.DROP,
     position: new google.maps.LatLng(job.lat, job.long),
-    title: job.title + ' - ' + job.company 
+    title: job.title + ' - ' + job.company,
+    icon: '/images/marker-red.png'
   });
   
   marker.infowindow = new google.maps.InfoWindow({
@@ -182,14 +183,15 @@ function createContactInfoWindow(c, marker, map) {
 }
 
 function setupResultsBox() {
-  $('div#results_list ul#results li').hover(function(evt) {
-    var i = evt.target.getAttribute("data-index");
-    job_markers[i].setIcon("/images/marker-blue.png");
-  },
-  
-  function(evt) {
-    var i = evt.target.getAttribute("data-index");
-    job_markers[i].setIcon("/images/marker-red.png");
+  $('div#results_list ul#results li').click(function(evt) {
+    for (var i = 0; i < job_markers.length; i++) {
+      job_markers[i].setIcon('/images/marker-red.png');
+      job_markers[i].setZIndex(1);
+    }
+    var i = $(evt.target).closest('li').get(0).getAttribute("data-index");
+    job_markers[i].setZIndex(5);
+    job_markers[i].setIcon('/images/marker-blue.png');
+    map.panTo(job_markers[i].getPosition());
   });
 }
 
