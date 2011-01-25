@@ -23,7 +23,6 @@ div#notice {
   width: 100%;
   background: yellow;
   height: 1.5em;
-  margin: 3px;
 }
 
 div#logintab {
@@ -111,6 +110,14 @@ div#sign_up {
   width: 900px;
   margin: 120px auto;
 }
+
+div#edit_account {
+  overflow: hidden;
+  width: 900px;
+  margin: 90px auto;
+  margin-left: 110px;
+}
+
 
 div#reset {
   overflow: hidden;

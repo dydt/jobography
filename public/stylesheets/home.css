@@ -18,10 +18,12 @@ div#inputform {
 
 div#recent {
   text-align: center;
-  margin: 23px; 
+  font-size: 8pt;
+  margin-top: 12px; 
   margin-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 0.5em;
 }
 
 div#recent p {
@@ -29,9 +31,12 @@ div#recent p {
 }
 
 div#infotext {
-  text-align: center;
   letter-spacing: -.02em;
   margin: 30px auto;
   line-height: 1.5em;
-  width: 520px;
+  width: 425px;
+}
+
+div#infotext p {
+  text-align: center;
 }

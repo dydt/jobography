@@ -293,11 +293,11 @@ function setupResultsBox() {
     if (a.attr('data-state') == 'hidden') {
       $('div#results_box').animate({right : '7px'}, 500, null);
       a.attr('data-state', 'shown');
-      $('img', a).attr('src', '/images/arrow-right.png');
+      $('img', a).attr('src', '/images/arrow-right1.png');
     } else {
       $('div#results_box').animate({right : '-253px'}, 500, null);
       a.attr('data-state', 'hidden');
-      $('img', a).attr('src', '/images/arrow-left.png');
+      $('img', a).attr('src', '/images/arrow-left1.png');
     }
   });
 }
