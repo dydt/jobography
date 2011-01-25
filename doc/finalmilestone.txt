@@ -1,0 +1,68 @@
+try signing in or signing in from the map page
+
+1. What is your primary target audience?
+We're targeting job-seekers who care about where they want to work [insert em-dash] where there are jobs available, where they have many friends or acquaintances, and where they would like to work.
+
+2. What problem does your application address?
+Job search sites don't adequately or attractively emphasize location, and they do not integrate your social networks into the job search.
+
+3. How does your application address the problem above?
+Jobography makes a map the core visualization.  Job search results are plotted on the map as well as the locations of your contacts.
+
+4. What is the killer feature of your application?
+When you import your contacts, 
+
+5. Which of the themes does your application match?
+Our application matches the theme of jobs.  We help users find jobs.
+
+6. Who is on your team? 
+(Clifford) Merritt Boyd, mboyd@mit.edu, MIT, Course 8, Class of 2013, undergraduate
+Diyang Tang, diyangt@mit.edu, MIT, Course 18C, Class of 2013, undergraduate
+
+7. How did the team members meet?
+We are friends and live on the same hall of our dorm.
+
+8. What browser do you want us to use to test your application?
+We would like you to use the latest version of Chrome (8).
+
+9. What is your application’s URL?
+Jobography is located at <jobography.heroku.com>.
+
+10. What credentials (username / password) should we use to sign into your application?
+Feel free to create your own account [insert em-dash here] seeing your own contacts drop in on the map and interacting with them are features we're proud of.
+
+If you would like an account to use, use jobography@mit.edu (password: jobography).  The same credentials hold for the Facebook account.  Keep in mind, though, that his circle of friends is small.
+
+11. Briefly describe what we should do to exercise your site’s functionality. Highlight any non-obvious finishing touches that you’re proud of.
+Search for a job!  Search anywhere [insert em-dash] your town, your state, or, if you leave the location box blank, the entire U.S.  Import your contacts from Facebook and see how they are distributed alongside your job search results.  Click on your contacts on the map and see if they can help you get a job in a region they've worked before.
+
+We're proud of the work we've put into transitions and into the map.  Try navigating around; click on "Show Contacts" on the map when you're not signed in or 
+
+On the map, try hovering and collapsing the results text box.  Try searching again when you're seeing your results on the map.
+
+12. Do you want to be considered for the Flex special prize?
+No
+
+13. Do you want to be considered for the Silverlight special prize? 
+No
+
+14. Do you want to be considered for the HTML5 special prize? 
+No.  While we did make use of HTML5, it was not our focus.
+
+15. Are you available to present to the judges on Wednesday 1/26, 2-5pm?
+Yes.
+
+16. List the sources of all the 3rd-party data, code, and media that your site uses.
+Indeed: https://ads.indeed.com/jobroll/xmlfeed
+Facebook: http://developers.facebook.com/docs/api
+Google Maps: http://maps.gstatic.com/intl/en_us/mapfiles/api-3/3/6/main.js
+Google Fonts: http://code.google.com/webfonts
+Devise: https://github.com/plataformatec/devise
+OAuth: http://oauth.rubyforge.org/
+OmniAuth: https://github.com/intridea/omniauth
+Nokogiri: http://nokogiri.org/
+JSON: http://flori.github.com/json/
+jQuery: http://jquery.com/
+Rails: http://rubyonrails.org/
+Heroku: heroku.com
+
