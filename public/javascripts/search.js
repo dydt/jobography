@@ -184,7 +184,7 @@ function getContacts() {
   if (contact_load_index >= contacts.length) {
     $('div#toggle_contacts').html(
       "<span class='fade'>Done!</span>");
-    $('div#toggle_contacts span.fade').animate({opacity: '0'}, 1000, function() {
+    $('div#toggle_contacts span.fade').animate({opacity: '0'}, 1500, function() {
       $('div#toggle_contacts').html(
         "<a id='toggle' href='#'>Hide contacts</a>");
       $('div#toggle_contacts a#toggle').click(toggleContacts);
@@ -219,10 +219,17 @@ function addContact(c) {
     icon: '/images/marker-green.png'
   });
   
-  var contentString = '<div class="contactWindow"><p><h4>'+c.name+
-                      '</h4></p><p><img src=graph.facebook.com/'+c.facebook_id+
-                      '/picture?type=small';
-  
+  var contentString = 
+  "<div class='contact_window'>" + 
+      "<div class='contact_pic'>" +
+        "<img alt='contact photo' src='http://graph.facebook.com/"+c.facebook_id+
+                      "/picture?type=small'>" +
+      "<div class='contact_body'>" +
+        "<h4>"+c.name+"</h4>" +
+        "<p class='contact_text'>Lorem ipsum dolorem...</p>" +
+      "</div>" +
+  "</div>";
+    
   marker.infowindow = new google.maps.InfoWindow({
     content: contentString
   });

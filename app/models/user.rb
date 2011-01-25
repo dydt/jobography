@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :facebook_contacts, :autosave => true, :dependent => :destroy
   has_many :employments, :as => :contact, :dependent => :destroy
   
+  after_create :send_welcome_email
   after_save :sync_facebook
 
   # Setup accessible (or protected) attributes for your model
@@ -15,7 +16,10 @@ class User < ActiveRecord::Base
                     :facebook_contacts, :employments
   validates_presence_of :name
   validates_uniqueness_of :email
-
+  
+  def send_welcome_email()
+    UserMailer.deliver_welcome_email(self)
+  end
   
   def self.new_with_session(params, session)
     super.tap do |user|

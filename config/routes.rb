@@ -10,7 +10,7 @@ Six470::Application.routes.draw do
   
   match 'jobs/:id/json' => 'jobs#json'
 
-  resources :users do
+  resources :users, :only => [] do
     resources :facebook_contacts, :only => [:index, :show]
   end
 

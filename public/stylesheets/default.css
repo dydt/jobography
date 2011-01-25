@@ -352,3 +352,33 @@ div#results_list li p.result_text {
 p.result_text {
   font-size: 10pt;
 }
+
+div.contact_window {
+  overflow: hidden;
+}
+
+div.contact_window div.contact_photo {
+  float: left;
+  margin: 20px 5px;
+  height: 100%;
+}
+
+div.contact_window div.contact_photo img {
+  float: left;
+  padding-top: 20px;
+}
+
+div.contact_window div.contact_body {
+  float: right;
+}
+
+div.contact_window h4 {
+  text-align: center;
+  line-height: 1.5em;
+  margin: 0 5px;
+}
+
+div.contact_window p {
+  margin: 10px;
+}
+

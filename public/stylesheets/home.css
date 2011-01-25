@@ -29,6 +29,8 @@ div#recent p {
 }
 
 div#infotext {
+  text-align: center;
+  letter-spacing: -.02em;
   margin: 30px auto;
   line-height: 1.5em;
   width: 520px;

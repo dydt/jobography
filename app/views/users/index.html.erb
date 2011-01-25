@@ -1,9 +1,0 @@
-<h1>User#display</h1>
-
-<p><%= link_to 'New user', new_user_registration_path %></p>
-
-<br />
-
-<% @users.each do |user| %>
-	<p><%= link_to user.name, user, :action =>'edit' %></p>
-<% end %>
